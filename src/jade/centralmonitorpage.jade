@@ -80,8 +80,14 @@ div.container-fluid
                 //div(class="loader1",ms-visible="show_loading === true",style="margin-top: 100px;")
                   i
                   i
-                div(style="text-align:center;padding-top:130px",ms-visible="show_loading === true")
-                  div.loader.loader-5
+                  
+                div.loading-bro(ms-visible="show_loading === true",style="text-align: center;margin-top: -180px;")
+                  svg(id="load",x="0px",y="0px",viewBox="0 0 150 150")
+                    circle(id="loading-inner",cx="75",cy="75",r="60")
+                      
+                //div(style="text-align:center;padding-top:130px",ms-visible="show_loading === true")
+                  //div.loader.loader-5
+                  
                 span(style="float:right;padding-right: 23px;",ms-visible="show_loading === false")   存储
                   img(class="img-circle",src="images/d3/networking.png",style="width: 20px;height: 20px;float: left;")
                 //span(style="float:right;padding-right: 23px;",ms-visible="show_loading === false")   备服务器

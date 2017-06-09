@@ -11240,7 +11240,7 @@ class CentralColonylistPage extends DetailTablePage
         vm.change_client = @change_client
         
     rendered: () =>
-        super(
+        super()
         console.log(99);
         $('.tip-twitter').remove();
         PortletDraggable.init()
