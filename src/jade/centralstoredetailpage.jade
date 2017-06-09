@@ -1,0 +1,358 @@
+doctype html
+div.container-fluid.wow.fadeIn
+  ul.breadcrumb
+    li
+      a(href="#",ms-text="'主页'",ms-click="switch_to_page('overview')")
+      i.icon-circle
+    li
+      a(href="#",ms-text="lang.title",ms-click="switch_to_page('monitor')")
+      i.icon-circle
+    li
+      a(href="#",ms-text="lang.title_store",ms-click="switch_to_page('monitor')")
+      i.icon-circle
+    li
+      a(href="#",ms-text="tabletitle") 
+  h3.page-title(ms-html="lang.title")
+  div.row-fluid.ui-sortable#sortable_portlets
+    div.span12.column.sortable
+      div.portlet.box.blue
+        div.portlet-title
+          div.caption
+            i.icon-bar-chart
+            | 监控详情
+        div.portlet-body
+          div(class="accordion scrollable in collapse",id="accordion2",style="height: auto;")
+            div.alert.alert-error.hide
+              button(class="close",data-dismiss="alert")
+              | 获取机器信息失败
+            div(class="accordion-group")
+              div(class="accordion-heading")
+                a(class="accordion-toggle collapsed",data-toggle="collapse",data-parent="#accordion2",href="#collapse_2_1")
+                  i.icon-graph(style="padding-right: 10px;")
+                  | 系统指标
+              div(id="collapse_2_1",class="accordion-body collapse",style="height: 0px;")
+                div(class="accordion-inner")
+                  div.row-fluid
+                    div.span6
+                      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+                        div.portlet-title(style="margin-bottom: 22px;padding: 12px 10px 17px;")
+                          div.caption(style="font-weight:bold")
+                            //i.icon-signal
+                            | {{lang.title_flow_in}}
+                            span(class="caption-helper",style="color: rgb(158, 172, 180);font-size: 13px;font-weight: 400;padding-left: 5px;") (MB/S)
+                          div.tools
+                            a(href="javascript:;",class="collapse")
+                            a(href="javascript:;",class="reload")
+                            a(href="javascript:;",class="remove")
+                          //div.tools
+                            //div.btn-group.pull-right(data-toggle="buttons-radio")
+                              //a.btn.roundred.mini(ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb",href="javascript:;",ms-text="lang.btn_write_flow",id="net_write",style="font-size: 13px !important;height: 17px;color: rgb(216, 74, 56);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+                              //a.btn.roundred.mini(ms-class="active:flow_type=='fread_mb'",data-flow-type="fread_mb",href="javascript:;",ms-text="lang.btn_read_flow",id="net_read",style="font-size: 13px !important;height: 17px;color: rgb(216, 74, 56);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+                        div.portlet-body
+                          div#load_stats_content(style="display: block;")
+                            div#flow_stats_in(style="height: 250px;font-size: 14px;")
+
+                    div.span6
+                      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+                        div.portlet-title(style="padding: 12px 10px 17px;")
+                          div.caption(style="font-weight:bold")
+                            //i.icon-pie-chart
+                            | 服务指标
+                          div.actions
+                          div.tools
+                            a(href="javascript:;",class="collapse")
+                            a(href="javascript:;",class="reload")
+                            a(href="javascript:;",class="remove")
+                        div.portlet-body(style="")
+                          div(style="height:262px")
+                            div.span12(style="padding-top: 30px;")
+                              div(style="padding: 10px;border-bottom: 1px solid rgb(243, 243, 243);")
+                                span6
+                                  span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="cpu_load + '%'")
+                                  span(style="display: block;color:rgb(141,141,141)") 
+                                    i.icon-energy
+                                    | 处理器
+                                span6(style="float: right;margin-top: -40px;")
+                                  div(id="mini_cpu_stodetail",style=" display: inline-block; width: 22px; height: 20px;")
+                 
+                              div(style="padding: 10px;border-bottom: 1px solid rgb(243, 243, 243);")
+                                span6
+                                  span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="cache_load + '%'")
+                                  span(style="display: block;color:rgb(141,141,141)") 
+                                    i.icon-fire
+                                    | 缓存
+                                span6(style="float: right;margin-top: -40px;")
+                                  div(id="mini_cache_stodetail",style=" display: inline-block; width: 22px; height: 20px;")
+                              
+                              div(style="padding: 10px;")
+                                span6
+                                  span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="mem_load + '%'")
+                                  span(style="display: block;color:rgb(141,141,141)") 
+                                    i.icon-feed
+                                    | 内存
+                                span6(style="float: right;margin-top: -40px;")
+                                  div(id="mini_mem_stodetail",style=" display: inline-block; width: 22px; height: 20px;")
+                  div.row-fluid
+                    div.span6
+                      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+                        div.portlet-title(style="margin-bottom: 22px;padding: 12px 10px 17px;")
+                          div.caption(style="font-weight:bold")
+                            //i.icon-signal
+                            | {{lang.title_flow_out}}
+                            span(class="caption-helper",style="color: rgb(158, 172, 180);font-size: 13px;font-weight: 400;padding-left: 5px;") (MB/S)
+                          div.tools
+                            a(href="javascript:;",class="collapse")
+                            a(href="javascript:;",class="reload")
+                            a(href="javascript:;",class="remove")
+                          //div.tools
+                            //div.btn-group.pull-right(data-toggle="buttons-radio")
+                              //a.btn.roundblue.mini(id="vol_write",href="javascript:;",ms-text="lang.btn_write_flow",ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb",style="font-size: 13px !important;height: 17px;color: rgb(77, 144, 254);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+                              //a.btn.roundblue.mini(id="vol_read",href="javascript:;",ms-text="lang.btn_read_flow",ms-class="active:flow_type=='fread_mb'",data-flow-type="fread_mb",style="font-size: 13px !important;height: 17px;color: rgb(77, 144, 254);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+                        div.portlet-body
+                          div#load_stats_content(style="display: block;")
+                            div#flow_stats_out(style="height: 250px;font-size: 14px;")
+
+                    div.span6
+                      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important")
+                        div.portlet-title(style="padding: 12px 10px 17px;")
+                          div.caption(style="font-weight:bold")
+                            //i.icon-pie-chart
+                            | 服务指标
+                          div.actions
+                          div.tools
+                            a(href="javascript:;",class="collapse")
+                            a(href="javascript:;",class="reload")
+                            a(href="javascript:;",class="remove")
+                        div.portlet-body
+                          div(style="height:262px")
+                            div.span12(style="padding-top: 30px;")
+                              div(style="padding: 10px;border-bottom: 1px solid rgb(243, 243, 243);")
+                                span6
+                                  span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="system_load + '%'")
+                                  span(style="display: block;color:rgb(141,141,141)") 
+                                    i.icon-drawer
+                                    | 系统盘容量
+                                span6(style="float: right;margin-top: -40px;")
+                                  div(id="mini_system_stodetail",style=" display: inline-block; width: 22px; height: 20px;")
+                  
+                              div(style="padding: 10px;border-bottom: 1px solid rgb(243, 243, 243);")
+                                span6
+                                  span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="var_load + '%'")
+                                  span(style="display: block;color:rgb(141,141,141)") 
+                                    i.icon-folder-close-alt
+                                    | var文件夹容量
+                                span6(style="float: right;margin-top: -40px;")
+                                  div(id="mini_var_stodetail",style=" display: inline-block; width: 22px; height: 20px;")
+                                
+                              div(style="padding: 10px;")
+                                span6
+                                  span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="cap_load + '%'")
+                                  span(style="display: block;color:rgb(141,141,141)") 
+                                    i.icon-drawer
+                                    | 文件系统容量
+                                span6(style="float: right;margin-top: -40px;")
+                                  div(id="mini_cap_stodetail",style=" display: inline-block; width: 22px; height: 20px;")
+                                        
+            div(class="accordion-group",style="")
+              div(class="accordion-heading")
+                a(class="accordion-toggle collapsed",data-toggle="collapse",data-parent="#accordion2",href="#collapse_2_2")
+                  i.icon-table(style="padding-right: 10px;")
+                  | 磁盘信息
+              div(id="collapse_2_2",class="accordion-body collapse",style="height: 0px;")
+                div(class="accordion-inner")
+                  div.row-fluid
+                    table#table1.table.table-hover
+                      tbody
+                        tr(ms-repeat-col="slots")
+                          td(ms-repeat-disk="col")
+                            span.tooltips(ms-html="fattr_disk_status(disk.role,disk.raidcolor,disk.slot)",ms-title="disk_list(disk)",data-toggle="tooltip",data-placement="left",data-html="true")
+                    div(ms-text="lang.mark_spare")
+                    table.table.table-striped
+                      tbody
+                        tr
+                          td(ms-repeat-e="raids",ms-html="fattr_raid_status(e.name,e.color)")    
+
+            div(class="accordion-group")
+              div(class="accordion-heading")
+                a(class="accordion-toggle collapsed",data-toggle="collapse",data-parent="#accordion2",href="#collapse_2_3")
+                  i.icon-hdd(style="padding-right: 10px;")
+                  | 磁盘详情
+              div(id="collapse_2_3",class="accordion-body collapse",style="height: 0px;")
+                div(class="accordion-inner")
+                  div.row-fluid
+                    table#table2.table.table-striped.table-hover
+                      thead
+                        tr
+                          th(ms-text="lang.th_location")
+                          th(ms-text="lang.th_host",ms-if="false")
+                          th(ms-text="lang.th_health")
+                          th(ms-text="lang.th_raid")
+                          th(ms-text="lang.th_role")
+                          th(ms-text="lang.th_capacity")
+                          th(ms-text="lang.th_init",ms-if="false")
+                      tbody
+                        tr(ms-repeat-e="disks")
+                          td {{e.location}}
+                          td(ms-html="fattr_host(e.host)",ms-if="false")
+                          td(ms-html="fattr_health(e.health)")
+                          td(ms-text="e.raid")
+                          td(ms-html="fattr_role(e.role)")
+                          td(ms-text="fattr_cap(e.cap_sector)")
+                          td(ms-html="fattr_import(e.host)",ms-click="format_disk(e)",ms-if="false")
+
+            div(class="accordion-group",style="")
+              div(class="accordion-heading")
+                a(class="accordion-toggle collapsed",data-toggle="collapse",data-parent="#accordion2",href="#collapse_2_4")
+                  i.icon-tasks(style="padding-right: 10px;")
+                  | 阵列信息
+              div(id="collapse_2_4",class="accordion-body collapse",style="height: 0px;")
+                div(class="accordion-inner")
+                  div.row-fluid
+                    table#table3.table.table-striped.table-hover
+                      thead
+                        tr
+                          th(ms-text="lang.th_name")
+                          th(ms-text="lang.th_level")
+                          th(ms-text="lang.th_health")
+                          th(ms-text="lang.th_capacity")
+                          th(ms-text="lang.th_capacity_used")
+                      tbody
+                        tr(ms-repeat-e="raids")
+                          td(ms-text="e.name")
+                          td(ms-text="e.level")
+                          td(ms-html="fattr_health(e.health)")
+                          td(ms-text="fattr_cap(e.cap_sector)")
+                          td(ms-text="fattr_cap(e.used_cap_sector)")
+         
+            div(class="accordion-group")
+              div(class="accordion-heading")
+                a(class="accordion-toggle collapsed",data-toggle="collapse",data-parent="#accordion2",href="#collapse_2_5")
+                  i.icon-list-alt(style="padding-right: 10px;")
+                  | 虚拟磁盘
+              div(id="collapse_2_5",class="accordion-body collapse",style="height: 0px;")
+                div(class="accordion-inner")
+                  div.row-fluid
+                    table#table4.table.table-striped.table-hover
+                      thead
+                        tr
+                          th(ms-text="lang.th_name")
+                          //th(ms-text="lang.th_fs")
+                          th(ms-text="lang.th_health")
+                          th(ms-text="lang.th_capacity")
+                      tbody
+                        tr(ms-repeat-e="volumes")
+                          td(ms-text="e.name")
+                          //td(ms-text="e.type")
+                          td(ms-html="fattr_health(e.health)")
+                          td(ms-text="fattr_cap(e.cap_sector)")
+
+            div(class="accordion-group",style=" ")
+              div(class="accordion-heading")
+                a(class="accordion-toggle collapsed",data-toggle="collapse",data-parent="#accordion2",href="#collapse_2_6")
+                  i.icon-wrench(style="padding-right: 10px;")
+                  | 文件系统
+              div(id="collapse_2_6",class="accordion-body collapse",style="height: 0px;")
+                div(class="accordion-inner")
+                  div.row-fluid
+                    table#table5.table.table-striped.table-hover
+                      thead
+                        tr
+                          th(ms-text="lang.th_name")
+                          th(ms-text="lang.th_fs")
+                          //th(ms-text="lang.th_chunk")
+                          th(ms-text="lang.th_volume")
+                      tbody
+                        tr(ms-repeat-e="filesystems")
+                          td(ms-text="e.name")
+                          td(ms-text="e.type")
+                          //td(ms-text="e.chunk")
+                          td(ms-text="e.volume")
+            
+            div(class="accordion-group")
+              div(class="accordion-heading")
+                a(class="accordion-toggle collapsed",data-toggle="collapse",data-parent="#accordion2",href="#collapse_2_7")
+                  i.icon-bell(style="padding-right: 10px;")
+                  | 系统日志
+              div(id="collapse_2_7",class="accordion-body collapse",style="height: 0px;")
+                div(class="accordion-inner")
+                  div.row-fluid
+                    div.span12
+                      div.tabbable.tabbable-custom
+                        ul.nav.nav-tabs(style="margin-top: 0;")
+                          li.active
+                            a(class="special",href="#pages_1",data-toggle="tab")
+                              i.icon-bell
+                              | {{lang.all_info}}
+                          //li
+                            a(class="special",href="#pages_2",data-toggle="tab")
+                              i.icon-remove
+                              | {{lang.mistake}}
+                          //li
+                            a(class="special",href="#pages_3",data-toggle="tab")
+                              i.icon-warning-sign
+                              | {{lang.warning}}
+                          //li
+                            a(class="special",href="#pages_4",data-toggle="tab")
+                              i.icon-volume-up
+                              | {{lang.info}}
+                        div.tab-content
+                          div#pages_1.tab-pane.active
+                            div#journals-scroller-1.scroller(data-height="320px")
+                              table#log-table1.table.table-striped.table-hover
+                                thead
+                                  tr
+                                    th(ms-text="lang.date",style="")
+                                    th(ms-text="lang.level",style="")
+                                    //th(ms-text="lang.status",style="")
+                                    th(ms-text="lang.message",style="")
+                                tbody
+                                  tr(ms-repeat-e="journal")
+                                    td(ms-text="e.created")
+                                    td(ms-html="fattr_journal_status(e.level)")
+                                    //td(ms-text="e.chinese_status",style="")
+                                    td(ms-text="e.message")
+                          div#pages_2.tab-pane
+                            div#journals-scroller-2.scroller(data-height="320px")
+                              table#log-table2.table.table-striped.table-hover
+                                thead
+                                  tr
+                                    th(ms-text="lang.date",style="")
+                                    th(ms-text="lang.level",style="")
+                                    th(ms-text="lang.status",style="")
+                                    th(ms-text="lang.message",style="")
+                                tbody
+                                  tr(ms-repeat-e="journal_critical")
+                                    td(ms-text="e.created")
+                                    td(ms-html="fattr_journal_status(e.level)")
+                                    td(ms-text="e.chinese_status",style="")
+                                    td(ms-text="e.message")
+                          div#pages_3.tab-pane
+                            div#journals-scroller-3.scroller(data-height="320px")
+                              table#log-table3.table.table-striped.table-hover
+                                thead
+                                  tr
+                                    th(ms-text="lang.date",style="")
+                                    th(ms-text="lang.level",style="")
+                                    th(ms-text="lang.status",style="")
+                                    th(ms-text="lang.message",style="")
+                                tbody
+                                  tr(ms-repeat-e="journal_warning")
+                                    td(ms-text="e.created")
+                                    td(ms-html="fattr_journal_status(e.level)")
+                                    td(ms-text="e.chinese_status",style="")
+                                    td(ms-text="e.message")
+                          div#pages_4.tab-pane
+                            div#journals-scroller-4.scroller(data-height="320px")
+                              table#log-table4.table.table-striped.table-hover
+                                thead
+                                  tr
+                                    th(ms-text="lang.date",style="")
+                                    th(ms-text="lang.level",style="")
+                                    th(ms-text="lang.status",style="")
+                                    th(ms-text="lang.message",style="")
+                                tbody
+                                  tr(ms-repeat-e="journal_info")
+                                    td(ms-text="e.created")
+                                    td(ms-html="fattr_journal_status(e.level)")
+                                    td(ms-text="e.chinese_status",style="")
+                                    td(ms-text="e.message")

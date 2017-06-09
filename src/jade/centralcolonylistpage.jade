@@ -1,0 +1,87 @@
+doctype html
+div.container-fluid
+  ul.breadcrumb
+    li
+      a(href="#",ms-text="'主页'",ms-click="switch_to_page('overview')")
+      i.icon-circle
+    li
+      a(ms-text="'系统配置'")
+  h3.page-title(ms-html="'系统配置'")
+  div.row-fluid.ui-sortable#sortable_portlets
+    div.span12.column.sortable
+      div.portlet.box.purple-sharp
+        div.portlet-title
+          div.caption
+            i.icon-layers
+            | 集群管理
+          div.actions
+            div.btn-group
+              a.btn.btn-default.btn-sm(href="#",data-toggle="dropdown")
+                i.icon-wrench
+                | 操作
+                i.icon-angle-down(style="padding-left: 10px;")
+              ul.dropdown-menu.pull-right
+                li(ms-click="create")
+                  a(href="#")
+                    i.icon-plus(style="padding-right: 5px;")
+                    | 创建
+                    
+                li(ms-click="delete_record")
+                  a(href="#")
+                    i.icon-trash(style="padding-right: 5px;")
+                    | 删除
+            
+        div.portlet-body
+          table#store-table.table.table-striped
+            thead
+              tr
+                th(style="width: 45px;")
+                  input(type="checkbox",ms-duplex-radio="all_checked",id="all_checked")
+                th(ms-text="'集群结构'",style="")
+                th(ms-text="'名称'",style="")
+                //th(ms-text="'入口地址'",style="width: 164px;")
+                th(ms-text="'预配置状态'",style="")
+                th(ms-text="'扩容状态'",style="")
+                th(ms-text="'操作'",style="text-align:center")
+                //th(ms-text="lang.th_server",style="width: 141px;")
+                //th(ms-text="lang.th_edit",style="width: 80px;")
+            tbody
+              tr(ms-repeat-e="devices")
+                td
+                  input(type="checkbox",ms-duplex-radio="e.checked")
+                td
+                  span.row-details(ms-click="detail",ms-class="row-details-close:e.detail_closed",ms-class-1="row-details-open:!e.detail_closed")
+                td(ms-text="e.cid")
+                //td(ms-text="e.samba")
+                td(ms-html="fattr_server_health(e.zoofs)")
+                td(ms-html="fattr_server_health(e.store)")
+                td(style="text-align:center")
+                  //a.btn.blue.mini.tooltips(href="javascript:;",ms-click="change_samba(e.name);",ms-if="e.status == false")
+                    //| 更改
+                  //a.btn.red.mini.tooltips(href="javascript:;",ms-click="stop(e.name);",ms-if="e.status == true")
+                    //| 解除
+                    
+                  a.hastip(href="javascript:;",ms-click="expand(e.uuid,e.zoofs);",title="预配置",style="font-size: 15px;padding: 10px;")
+                    i.icon-magic-wand
+                    
+                  div.btn-group(style="display:none")
+                    a.hastip(href="javascript:;",data-toggle="dropdown",title="启动")
+                      i.icon-control-play
+                      
+                    ul.dropdown-menu.pull-right
+                      li(ms-click="start_auto(e.device,e.zoofs,e.store);")
+                        a(href="#")
+                          | 自动
+                    
+                      li(ms-click="start_manual(e.devices,e.zoofs,e.store);")
+                        a(href="#")
+                          | 手动
+                        
+                  a.hastip(href="javascript:;",ms-click="start_manual(e.device,e.zoofs,e.store);",title="扩容",style="font-size: 15px;padding: 10px;")
+                    i.icon-sitemap
+
+                  a.hastip(href="javascript:;",ms-click="change_client(e.uuid,e.cid,e.store);",title="启动",style="font-size: 15px;padding: 10px;")
+                    i.icon-control-play
+                    
+                  a.hastip(href="javascript:;",ms-click="stop(e.uuid);",title="初始化",style="font-size: 15px;padding: 10px;")
+                    i.icon-remove

@@ -1,0 +1,33 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h4(ms-text="lang.title")
+  div.modal-body
+    form.manual.form-horizontal(action="javascripts:;")
+      div.alert.alert-error.hide
+        button.close(ms-click="close_alert")
+        | 请填写完整
+      div.control-group
+        label.control-label(ms-text="lang.label_ip")
+        div.controls
+          div.input-icon.left
+            i.icon-directions
+            input#add_ip.m-wrap.tooltips(type="text",name="ip",ms-duplex="ip",data-trigger="hover",ms-data-original-title="lang.tips_ip",data-placement="top")
+            
+      div.control-group
+        label.control-label(ms-text="lang.mode")
+        div.controls
+          div.input-icon.left
+            i.icon-screen-desktop
+          //select#manual.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options")
+          select#manual.proselection(ms-each-e="options",name="machinetype")
+            option(ms-value="e.value",ms-text="e.key")
+            
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

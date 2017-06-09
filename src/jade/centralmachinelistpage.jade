@@ -1,0 +1,63 @@
+doctype html
+div.container-fluid
+  ul.breadcrumb
+    li
+      a(href="#",ms-text="'主页'",ms-click="switch_to_page('overview')")
+      i.icon-circle
+    li
+      a(ms-text="'系统配置'")
+  h3.page-title(ms-html="'系统配置'")
+  div.row-fluid.ui-sortable#sortable_portlets
+    div.span12.column.sortable
+      div.portlet.box.green-sharp
+        div.portlet-title
+          div.caption
+            i.icon-layers
+            | 机器列表
+          div.actions
+            div.btn-group
+              a.btn.btn-default.btn-sm(href="#",data-toggle="dropdown")
+                i.icon-wrench
+                | 操作
+                i.icon-angle-down(style="padding-left: 10px;")
+              ul.dropdown-menu.pull-right
+                li(ms-click="create_mysql")
+                  a(href="#")
+                    i.icon-plus(style="padding-right: 5px;")
+                    | 创建
+                    
+                li(ms-click="delete_record")
+                  a(href="#")
+                    i.icon-trash(style="padding-right: 5px;")
+                    | 删除
+            
+        div.portlet-body
+          table#store-table.table.table-striped.table-hover
+            thead
+              tr
+                th(style="width: 45px;")
+                  input(type="checkbox",ms-duplex-radio="all_checked",id="all_checked")
+                //th(ms-text="lang.th_detail",style="")
+                th(ms-text="lang.th_ip",style="width: 134px;")
+                //th(ms-text="lang.th_session",style="width: 86px;")
+                th(ms-text="lang.th_name",style="width: 77px;")
+                th(ms-text="'所属集群'",style="width: 77px;")
+                //th(ms-text="lang.th_server",style="width: 141px;")
+                //th(ms-text="lang.th_edit",style="width: 80px;")
+            tbody
+              tr(ms-repeat-e="devices")
+                td
+                  input(type="checkbox",ms-duplex-radio="e.checked")
+                //td
+                  //span.row-details(ms-click="detail",ms-class="row-details-close:e.detail_closed",ms-class-1="row-details-open:!e.detail_closed")
+                td(ms-text="e.ip")
+                //td(ms-html="fattr_server_health(e.status)")
+                td(ms-text="e.name")
+                td(ms-text="e.cluster")
+                //td
+                  //a.btn.mini.green(href="javascript:;",ms-click="open_client(e.ip,e.devtype)",ms-if="e.status === false")
+                    //| 启动
+                  //a.btn.mini.red(href="javascript:;",ms-click="close_client(e.ip,e.devtype)",ms-if="e.status === true")
+                    //| 停止
+                  //a.btn.mini.red(href="javascript:;",ms-click="init_all(e.uid)")
+                    //| 初始化

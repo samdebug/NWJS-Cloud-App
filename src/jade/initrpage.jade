@@ -1,0 +1,57 @@
+doctype html
+div.container-fluid
+  h3.page-title(ms-html="lang.title")
+  div.row-fluid
+    div.span12
+      div.portlet.box.blue
+        div.portlet-title
+          div.caption
+            i.icon-sitemap
+            | {{lang.tabletitle}}
+          div.actions
+            a.btn.yellow(href="javascript:;",ms-click="create_initr")
+              i.icon-plus
+              | {{lang.create_btn}}
+            | &nbsp;
+            a.btn.red(href="javascript:;",ms-click="delete_initr")
+              i.icon-trash
+              | {{lang.delete_btn}}
+        div.portlet-body
+          table#initr-table.table.table-striped
+            thead
+              tr
+                th(style="width:20px")
+                  input(type="checkbox",ms-duplex-radio="all_checked")
+                th(ms-text="lang.th_detail",style="width:40px")
+                th(ms-text="lang.th_wwn",style="text-align:center",ms-visible="show_iscsi")
+                th(ms-text="lang.th_wwpn",ms-visible="!show_iscsi")
+                th(ms-text="lang.th_iface",ms-visible="show_iscsi")
+                th(ms-text="lang.th_session",style="width:80px",ms-visible="show_iscsi")
+                th(ms-text="lang.th_map",style="width:80px")
+                th(ms-text="lang.th_unmap",style="width:80px")
+                th(ms-text="lang.th_link",style="width:80px",ms-visible="show_iscsi")
+            tbody
+              tr(ms-repeat-e="initrs")
+                td
+                  input(type="checkbox",ms-duplex-radio="e.checked")
+                td
+                  span.row-details(ms-click="detail",ms-class="row-details-close:e.detail_closed",ms-class-1="row-details-open:!e.detail_closed")
+                td(ms-text="e.wwn",ms-visible="show_iscsi")
+                td(ms-text="e.wwn",ms-visible="!show_iscsi")
+                td(ms-text="e.iface",ms-visible="show_iscsi")
+                td(ms-html="fattr_active_session(e.active_session)",ms-visible="show_iscsi")
+                td
+                  a.btn.mini.yellow(href="javascript:;",ms-click="map_volumes($index);")
+                    i.icon-link
+                    | {{lang.th_map}}
+                td
+                  a.btn.mini.red(href="javascript:;",ms-click="unmap_volumes($index);")
+                    i.icon-unlink
+                    | {{lang.th_unmap}}
+                td(ms-visible="show_iscsi")
+                  a.btn.mini.purple(href="javascript:;",ms-click="link_initr($index);",ms-if="fattr_show_link(e.active_session)===false")
+                    i.icon-hdd
+                    | {{lang.td_link}}
+                  a.btn.mini.red(href="javascript:;",ms-click="unlink_initr($index);",ms-if="fattr_show_link(e.active_session)===true")
+                    i.icon-unlink
+                    | {{lang.td_unlink}}

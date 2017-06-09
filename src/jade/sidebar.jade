@@ -1,0 +1,25 @@
+doctype html
+ul.page-sidebar-menu(ms-each-e="navs", ms-if="server ==='store'")
+  //li
+    //div(class="sidebar-toggler hidden-phone")
+  li(ms-class="active:$index===active_index",ms-class-1="{{e.menuid}}")
+    a(href="javascript:;",ms-data-idx="$index",ms-click="tab_click",ms-hover="hover")
+      span.remove
+        i.icon-remove-circle
+      i.icon-home
+      span.title
+      | {{e.title}}
+      span.selected(ms-class="active:$index===active_index")
+      span
+    ul.sub-menu(style="display:none;")
+
+ul.page-sidebar-menu(ms-each-e="navs", ms-if="server ==='central'",data-slide-speed="200",data-auto-scroll="true")
+  li(ms-class="active:$index===active_index",ms-class-1="{{e.menuid}}")
+    a(href="javascript:;",ms-data-idx="$index",ms-click="tab_click",style="display:none")
+      i(ms-class="{{e.icon}}")
+      span.title
+        | {{e.title}}
+      span.arrow
+      span.selected(ms-class="active:$index===active_index")
+      
+    ul.sub-menu(style="display:none;margin-top: 0px;")

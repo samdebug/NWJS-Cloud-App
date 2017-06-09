@@ -1,0 +1,36 @@
+doctype html
+div.container-fluid
+  h3.page-title(ms-html="lang.title")
+  div.row-fluid
+    div.span12
+      div.portlet.box.red
+        div.portlet-title
+          div.caption
+            i.icon-bell
+            | {{lang.title_max}}
+          div.actions
+        div.portlet-body
+          table#base-table.table.table-striped
+            thead
+              tr
+                th(ms-text="lang.th_type",style="200px;font-weight:bold")
+                th(ms-text="lang.th_normal",style="200px;font-weight:bold")
+                th(ms-text="lang.th_bad",style="200px;font-weight:bold")
+                th(ms-text="lang.th_edit",style="200px;font-weight:bold")
+            tbody
+              tr(ms-repeat-e="devices")
+                td(ms-text="e.type")
+                td(ms-text="e.normal")
+                td(ms-text="e.bad")
+                td
+                  a.btn.mini.grey.tooltips(href="javascript:;",ms-title="lang.tips_create_all",data-placement="top")
+                    | {{lang.func_change}}
+                    
+       h3(ms-text="lang.diagnostic")
+       blockquote
+         p(style="font-size:16px")
+           ul
+             li(ms-text="lang.diagnostic_tip1")
+       a(ms-href="diagnosis_url",class="btn blue")
+         i.m-icon-swapdown.m-icon-white
+         | {{lang.diagnostic_btn}}

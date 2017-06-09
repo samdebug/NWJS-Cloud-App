@@ -1,0 +1,44 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h4(ms-text="'处理'")
+  div.modal-body
+    div.row-fluid
+      div.alert.alert-error.hide
+        button.close(ms-click="close_alert")
+        | 请选择
+      div.portlet.box.red
+        div.portlet-title
+          div.caption
+            i.icon-book
+            | {{lang.title}}
+          div.actions
+        div.portlet-body(style="")
+          div#journals-scroller.scroller(data-height="320px")
+            table#log-table.table.table-striped.table-hover
+              thead
+                tr
+                  th(style="width:20px")
+                    input(type="checkbox",ms-duplex-radio="all_checked")
+                  th(ms-text="lang.date",style="")
+                  th(ms-text="lang.level",style="")
+                  //th(ms-text="lang.status",style="")
+                  th(ms-text="lang.message",style="")
+              tbody
+                tr(ms-repeat-e="journal_unhandled")
+                   td
+                     input(type="checkbox",ms-duplex-radio="e.checked")
+               
+                   td(ms-text="e.created")
+                   td(ms-html="fattr_journal_status(e.level)")
+                   //td(ms-text="e.chinese_status")
+                   td(ms-text="e.chinese_message")
+                          
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

@@ -1,0 +1,20 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.diagnostic_btn")
+  div.modal-body
+    form.mysql.form-horizontal(action="javascripts:;")
+      div.control-group
+        label.control-label(ms-text="lang.label_ip")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="ip",ms-duplex="ip")
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

@@ -1,0 +1,43 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h4(ms-text="'总览'")
+  div.modal-body
+    div.row-fluid
+      div.portlet.box.green
+        div.portlet-title
+          div.caption
+            i.icon-graph
+            | 详情
+          div.actions
+        div.portlet-body(style="")
+          div#journals-scroller.scroller(data-height="320px")
+            table#detail-table.table.table-striped.table-hover
+              thead
+                tr
+                  th(ms-text="'地址'",style="")
+                  th(ms-text="'cpu'",style="")
+                  th(ms-text="'系统盘'",style="")
+                  th(ms-text="'内存'",style="")
+                  th(ms-text="'var'",style="")
+                  th(ms-text="'tmp'",style="")
+                  th(ms-text="'docker'",style="")
+              tbody
+                tr(ms-repeat-e="machine_detail")
+                   td(ms-text="e.ip")
+                   td(ms-text="e.cpu")
+                   td(ms-text="e.system")
+                   td(ms-text="e.mem")
+                   td(ms-text="e.var")
+                   td(ms-text="e.tmp")
+                   td(ms-text="e.docker")
+          p(style="font-weight:bold") 注：单位为百分比（%）
+          
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

@@ -1,0 +1,22 @@
+doctype html
+ul.page-sidebar-menu(ms-each-e="navs",data-slide-speed="200",data-auto-scroll="true")
+  li(ms-class="active:$index===active_index",ms-class-1="{{e.menuid}}")
+    a(href="javascript:;",ms-data-idx="$index",ms-click="tab_click",style="")
+      i(ms-class="{{e.icon}}")
+      span.title
+        | {{e.title}}
+      span.arrow
+      span.selected(ms-class="active:$index===active_index")
+      
+    ul.sub-menu(style="display:none;margin-top: 0px;")
+      li(ms-repeat-t="navs_base",ms-click="switch_to_page_base",ms-visible="e.menuid==='base'",ms-class="active:$index===active_index_base")
+        a.wave(class="bg",href="javascript:;",ms-data-id="t.id")
+          i
+          span.title
+            | {{t.title}}
+            
+      li(ms-repeat-s="navs_overview",ms-click="switch_to_page_overview",ms-visible="e.menuid==='overview'",ms-class="active:$index===active_index_overview")
+        a.wave(class="bg",href="javascript:;",ms-data-id="s.id")
+          i
+          span.title
+            | {{s.title}}

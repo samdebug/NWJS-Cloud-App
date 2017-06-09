@@ -1,0 +1,73 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h4(ms-text="'创建'")
+  div.modal-body
+    form.colony.form-horizontal(action="javascripts:;")
+      div.alert.alert-error.hide
+        button.close(ms-click="close_alert")
+        span(ms-text="'请填写完整'")
+        
+      div.control-group
+        label.control-label(ms-text="'集群名称'")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap.tooltips(type="text",name="colony",ms-duplex="colony",data-trigger="hover",ms-data-original-title="lang.tips_colony",data-placement="top")
+        
+      div.control-group
+        label.control-label(ms-text="'服务器'")
+        div.controls
+          div.input-icon.left
+            i.icon-desktop
+          //select#export_option.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options_export")
+          select#export_option.proselection(ms-each-e="options_export",name="export")
+            option(ms-value="e.value",ms-text="e.key")
+        
+      //div.control-group
+        //label.control-label(ms-text="'备份服务器'")
+        //div.controls
+          //div.input-icon.left
+            //i.icon-pencil
+            //input.m-wrap(type="text",name="backup_ip",ms-duplex="backup_ip")
+      
+      div.control-group
+        label.control-label(ms-text="'存储'")
+        div.controls.tooltips(style="color: rgb(85, 85, 85);display: table-caption;margin-left: 20px;border: 1px solid rgb(194, 202, 216);padding: 11px 161px 10px 12px;",data-trigger="hover",ms-data-original-title="lang.tips_store",data-placement="top")
+          div.disk-checkbox-col
+            label.checkbox.tooltips(style="width:200px")
+              input(type="checkbox",name="selector",ms-duplex-radio="all_checked",ms-text="'请选择'",id="all_checked")
+              | 全选
+                            
+          div.disk-checkbox-col(ms-repeat-e="storages")
+            label.checkbox.tooltips(style="width:200px")
+              input(type="checkbox",name="selector",ms-duplex-radio="e.checked")
+              | {{e.ip}}
+
+      //div.control-group
+        //label.control-label(ms-text="'存储'")
+        //div.controls
+          //textarea(name="storage",ms-duplex="storage",style="min-width: 225px;min-height: 100px;max-width: 470px;font-family: Microsoft YaHei;padding:10px")
+      
+      div.control-group(style="display:none")
+        label.control-label(ms-text="'客户端'")
+        div.controls
+          div.input-icon.left
+            i.icon-note
+          //select#client_option.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options_client")
+          select#client_option.proselection(ms-each-e="options_client",name="client")
+            option(ms-value="e.value",ms-text="e.key")
+            
+      //div.control-group
+        //label.control-label(ms-text="'客户端'")
+        //div.controls
+          //textarea(name="client",ms-duplex="client",style="min-width: 225px;min-height: 100px;max-width: 470px;font-family: Microsoft YaHei;padding:10px")
+           
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

@@ -1,0 +1,14 @@
+doctype html
+table.table
+  thead
+    tr
+      th(ms-text="'地址'",style="font-weight: bold;")
+      th(ms-text="'类型'",style="font-weight: bold;")
+      th(ms-text="'状态'",style="font-weight: bold;")
+      th(ms-text="'访问权限'",style="font-weight: bold;")
+  tbody
+    tr(ms-repeat-e="colonys")
+      td(ms-text="e.ip")
+      td(ms-text="e.chinese_type")
+      td(ms-html="fattr_server_health(e.status)")
+      td(ms-html="fattr_server_health(e.client)")

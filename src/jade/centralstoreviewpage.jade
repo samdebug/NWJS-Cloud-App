@@ -1,0 +1,478 @@
+doctype html
+div.container-fluid
+  ul.breadcrumb
+    li
+      a(href="#",ms-text="'主页'",ms-click="switch_to_page('overview')")
+      i.icon-circle
+    li
+      a(ms-text="'系统概况'")
+  h3.page-title(ms-html="lang.title2")
+  div.row-fluid.wow.fadeIn
+    div.responsive.span3(data-tablet="span6",data-desktop="span3")
+      div.dashboard-stat.purple(style="background:#3598dc;border-radius: 2px !important;")
+        div.visual(style="margin-left: -35px;")
+          i.icon-group(style="opacity: 0.1;font-size: 110px;")
+        div.details(style="padding-top: 16px;")
+          div.number
+            span.countup(ms-text="on_monitor")
+            | /
+            span.countup(ms-text="process_num")
+          div.desc(ms-text="lang.process_num")
+        a.more(href="javascript:;",style="background:rgb(78, 154, 219);border-radius: 2px !important",ms-click="switch_to_page('monitor')")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+          
+    div.responsive.span3(data-tablet="span6",data-desktop="span3")
+      div.dashboard-stat.yellow(style="background:#e35b5a;border-radius: 2px !important;",ms-click="handle_log")
+        div.visual(style="margin-left: -35px;")
+          i.icon-bullhorn(style="opacity: 0.1;font-size: 110px;")
+        div.details(style="padding-top: 16px;")
+          div.number.countup(ms-text="warning_num")
+          div.desc
+            span
+              | {{lang.warning_num}}
+            //span
+              | (未处理)
+        a.more(href="javascript:;",style="background:#e04a49;border-radius: 2px !important")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+          
+    div.responsive.span3(data-tablet="span6 fix-offset",data-desktop="span3")
+      div.dashboard-stat.green(style="background:#32c5d2;border-radius: 2px !important;")
+        div.visual(style="margin-left: -35px;")
+          i.icon-desktop(style="opacity: 0.1;font-size: 110px;")
+        div.details(style="padding-top: 16px;")
+          div.number
+            span(ms-text="cap_num")
+            | TB
+          div.desc(ms-text="lang.cap_num")
+        a.more(href="javascript:;",style="background:rgb(49, 193, 206);border-radius: 2px !important")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+          
+    div.responsive.span3(data-tablet="span6",data-desktop="span3")
+      div.dashboard-stat.blue(style="background:#8E44AD;border-radius: 2px !important;")
+        div.visual(style="margin-left: -35px;")
+          i.icon-sitemap(style="opacity: 0.1;font-size: 110px;")
+        div.details(style="padding-top: 16px;")
+          div.number.countup(ms-text="machine_num")
+          div.desc(ms-text="lang.machine_num")
+        a.more(href="javascript:;",style="background:rgb(142, 68, 173);border-radius: 2px !important",ms-click="switch_to_page('base')")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+          
+  div.clearfix
+  div.row-fluid.wow.fadeIn.ui-sortable#sortable_portlets
+    div.span6.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-signal
+            | {{lang.title_flow_in}}
+            span(class="caption-helper",style="color: rgb(158, 172, 180);font-size: 13px;font-weight: 400;padding-left: 5px;") (MB/S)
+            
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+            //div.btn-group.pull-right(data-toggle="buttons-radio")
+              //a.btn.roundred.mini(ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb",href="javascript:;",ms-text="lang.btn_write_flow",id="net_write",style="font-size: 13px !important;height: 17px;color: rgb(216, 74, 56);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+              //a.btn.roundred.mini(ms-class="active:flow_type=='fread_mb'",data-flow-type="fread_mb",href="javascript:;",ms-text="lang.btn_read_flow",id="net_read",style="font-size: 13px !important;height: 17px;color: rgb(216, 74, 56);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+        div.portlet-body
+          div#load_stats_content(style="display: block;")
+            div#flow_stats_in(style="height: 300px;font-size: 14px;")
+            
+    div.span6.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-signal
+            | {{lang.title_flow_out}}
+            span(class="caption-helper",style="color: rgb(158, 172, 180);font-size: 13px;font-weight: 400;padding-left: 5px;") (MB/S)
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+            //div.btn-group.pull-right(data-toggle="buttons-radio")
+              //a.btn.roundblue.mini(id="vol_write",href="javascript:;",ms-text="lang.btn_write_flow",ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb",style="font-size: 13px !important;height: 17px;color: rgb(77, 144, 254);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+              //a.btn.roundblue.mini(id="vol_read",href="javascript:;",ms-text="lang.btn_read_flow",ms-class="active:flow_type=='fread_mb'",data-flow-type="fread_mb",style="font-size: 13px !important;height: 17px;color: rgb(77, 144, 254);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+        div.portlet-body
+          div#load_stats_content(style="display: block;")
+            div#flow_stats_out(style="height: 300px;font-size: 14px;")
+            
+  div.row-fluid.wow.fadeIn.ui-sortable#sortable_portlets(style="")
+    div.span12.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.ti-menu-alt
+            | {{lang.title_store}}
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+        div.portlet-body
+          div(style="height:140px")
+            div.span3
+              div.dashboard-stat.grey
+                div.visual
+                  a.more(style="color: #000000;padding-top: 17px;width: 110px;text-align: center;cursor:pointer",ms-click="detail_disk")
+                    span(style="font-size: 40px;font-family: 'bebas';",ms-text="disk_number")
+                  a.more(style="color: #000000;text-align: center;font-size: 17px;width: 110px;")
+                    span(style="font-size: 16px;",ms-text="lang.disk_num")
+                  
+            div.span3
+              div.dashboard-stat.grey
+                div.visual
+                  a.more(style="color: #000000;padding-top: 17px;width: 110px;text-align: center;cursor:pointer",ms-click="detail_raid")
+                    span(style="font-size: 40px;font-family: 'bebas';",ms-text="raid_number")
+                  a.more(style="color: #000000;text-align: center;font-size: 17px;width: 110px;")
+                    span(style="font-size: 16px;",ms-text="lang.raid_num")
+                    
+            div.span3
+              div.dashboard-stat.grey
+                div.visual
+                  a.more(style="color: #000000;padding-top: 17px;width: 110px;text-align: center;cursor:pointer",ms-click="detail_volume")
+                    span(style="font-size: 40px;font-family: 'bebas';",ms-text="volume_number") 
+                  a.more(style="color: #000000;padding-left: 17px;font-size: 17px;width: 110px;")
+                    span(style="font-size: 16px;",ms-text="lang.volume_num")
+                  
+            div.span3
+              div.dashboard-stat.grey
+                div.visual
+                  a.more(style="color: #000000;padding-top: 17px;width: 110px;text-align: center;cursor:pointer",ms-click="detail_break")
+                    span(style="font-size: 40px;font-family: 'bebas';",ms-text="filesystem_number")
+                  a.more(style="color: #000000;padding-left: 17px;font-size: 17px;width: 110px;")
+                    span(style="font-size: 16px;",ms-text="lang.filesystem_num")
+                    
+  div.clearfix
+  div.row-fluid.wow.fadeIn.ui-sortable#sortable_portlets(style="")
+    div.span4.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-paper-plane
+            | {{lang.title_machine}}
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+        div.portlet-body(style="")
+          div(style="height:195px")
+            div.easy-pie-chart.hastip(ms-click="show_detail_modal",style="cursor:pointer",title="点击查看详情")
+              div#cpu-load-storeview.number.easyPieChart(data-percent="0")
+                span(style="color: #ffb848;font-size: 25px;font-family: 'bebas';") {{cpu_load}}
+              a.title(href="javascript:;",ms-title="lang.tips_cpu",data-placement="bottom",style="color:rgb(141, 141, 141);font-size: 13px;margin-top: 15px;")
+                | {{lang.title_cpu_load}}
+              div(ms-html="fattr_view_status(cpu_load,alarm,'处理器','storage')",style="text-align: center;margin-top: -10px")
+            
+    div.span4.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-paper-plane
+            | {{lang.title_machine}}
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+        div.portlet-body(style="")
+          div(style="height:195px")
+            div.easy-pie-chart.hastip(ms-click="show_detail_modal",style="cursor:pointer",title="点击查看详情")
+              div#cache-load-storeview.number.easyPieChart(data-percent="0")
+                span(style="color: rgb(40, 183, 121);font-size: 25px;font-family: 'bebas';") {{cache_load}}
+              a.title(href="javascript:;",style="color:rgb(141, 141, 141);font-size: 13px;margin-top: 15px;")
+                | {{lang.title_cache_load}}
+              div(ms-html="fattr_view_status(cache_load,alarm,'缓存','storage')",style="text-align: center;margin-top: -10px")
+            
+    div.span4.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-paper-plane
+            | {{lang.title_machine}}
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+        div.portlet-body(style="")
+          div(style="height:195px")
+            div.easy-pie-chart.hastip(ms-click="show_detail_modal",style="cursor:pointer",title="点击查看详情")
+              div#mem-load-storeview.number.easyPieChart(data-percent="0")
+                span(style="color: rgb(52, 152, 219);font-size: 25px;font-family: 'bebas';") {{mem_load}}
+              a.title(href="javascript:;",ms-title="lang.tips_mem",data-placement="bottom",style="color:rgb(141, 141, 141);font-size: 13px;margin-top: 15px;")
+                | {{lang.title_mem_load}}
+              div(ms-html="fattr_view_status(mem_load,alarm,'内存','storage')",style="text-align: center;margin-top: -10px")
+            
+  div.row-fluid.wow.fadeIn.ui-sortable#sortable_portlets(style="")
+    div.span6.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-drawer
+            | 文件系统总览
+            //span(class="caption-helper",style="color: rgb(158, 172, 180);font-size: 13px;font-weight: 400;padding-left: 5px;") (MB/S)
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+            //div.btn-group.pull-right(data-toggle="buttons-radio")
+              //a.btn.blue.mini(id="current",href="javascript:;",ms-text="'实时'",ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb",style="font-size: 13px !important;height: 17px;color: rgb(77, 144, 254);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+              //a.btn.blue.mini(id="plus",href="javascript:;",ms-text="'累计'",ms-class="active:flow_type=='fread_mb'",data-flow-type="fread_mb",style="font-size: 13px !important;height: 17px;color: rgb(77, 144, 254);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+        
+        div.portlet-body
+          div(style="height:270px")
+            div.hastip#pie_chart(ms-click="show_detail_modal",style="cursor:pointer;height: 230px;",title="点击查看详情")
+            
+    div.span6.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-pie-chart
+            | 服务指标
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+        div.portlet-body(style="")
+          div(style="height:270px")
+            div.span12
+              div(style="padding: 10px;border-bottom: 1px solid rgb(243, 243, 243);")
+                span6
+                  span(style="font-family: 'bebas';font-size: 25px;color:rgb(60, 192, 150)",ms-text="system + '%'")
+                  span
+                    div(ms-html="fattr_view_status(system,alarm,'系统盘容量','storage')")
+                  span(style="display: block;color:rgb(141,141,141)") 
+                    i.icon-drawer
+                    | 系统盘容量
+                span6.hastip(ms-click="show_detail_modal",style="cursor:pointer;float: right;margin-top: -40px;",title="点击查看详情")
+                  div(id="mini_system_store",style=" display: inline-block; width: 22px; height: 20px;")
+                  //div(id="bar",class="progress progress-success progress-striped active")
+                    //div(id="pro_weed_cpu",class="bar",style="")
+ 
+              div(style="padding: 10px;border-bottom: 1px solid rgb(243, 243, 243);")
+                span6
+                  span(style="font-family: 'bebas';font-size: 25px;color:rgb(60, 192, 150)",ms-text="temp + '%'")
+                  span
+                    div(ms-html="fattr_view_status(temp,alarm,'','')")
+                  span(style="display: block;color:rgb(141,141,141)") 
+                    i.icon-fire
+                    | 温度
+                span6.hastip(ms-click="show_detail_modal",style="cursor:pointer;float: right;margin-top: -40px;",title="点击查看详情")
+                  div(id="mini_temp_store",style=" display: inline-block; width: 22px; height: 20px;")
+                  //div(id="bar",class="progress progress-success progress-striped active")
+                    //div(id="pro_weed_mem",class="bar",style="")
+                 
+              div(style="padding: 10px;")
+                span6
+                  span(style="font-family: 'bebas';font-size: 25px;color:rgb(60, 192, 150)",ms-text="vars + '%'")
+                  span
+                    div(ms-html="fattr_view_status(vars,alarm,'var文件夹容量','storage')")
+                  span(style="display: block;color:rgb(141,141,141)") 
+                    i.icon-folder-close-alt
+                    | var文件夹容量
+                span6.hastip(ms-click="show_detail_modal",style="cursor:pointer;float: right;margin-top: -40px;",title="点击查看详情")
+                  div(id="mini_var_store",style=" display: inline-block; width: 22px; height: 20px;")
+            
+  div.row-fluid.wow.fadeIn.ui-sortable#sortable_portlets(style="display:none")
+    div.span12.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.ti-microsoft-alt
+            | {{lang.title_machine}}
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+        div.portlet-body(style="")
+          div.row-fluid
+            div.span4
+              //div#gauge-text1(style="font-family:'bebas';text-align: center;font-size:25px")
+              div(style="font-family:'bebas';text-align: center;font-size:25px;color:rgb(87, 199, 212)",ms-text="system")
+              div#sparkline_bar1(style="height: 150px;")
+              //div(ms-text="'系统空间'",style="text-align: center;color:rgb(141, 141, 141)")
+              div(ms-html="fattr_view_status(system,alarm,'系统盘容量','storage')",style="text-align: center;")
+            div.span4
+              //div#gauge-text2(style="font-family:'bebas';text-align: center;font-size:25px")
+              div(style="font-family:'bebas';text-align: center;font-size:25px;color:rgb(98, 168, 234)",ms-text="temp")
+              div#sparkline_bar2(style="height: 150px")
+              //div(ms-text="'温度'",style="text-align: center;color:rgb(141, 141, 141)")
+              div(ms-html="fattr_view_status(temp,alarm,'','')",style="text-align: center;")
+            div.span4
+              //div#gauge-text3(style="font-family:'bebas';text-align: center;font-size:25px")
+              div(style="font-family:'bebas';text-align: center;font-size:25px;color:rgb(146, 109, 222)",ms-text="cap")
+              div#sparkline_bar3(style="height: 150px;")
+              //div(ms-text="'存储空间'",style="text-align: center;color:rgb(141, 141, 141)")
+              div(ms-html="fattr_view_status(cap,alarm,'文件系统容量','storage')",style="text-align: center;")
+  
+  div.row-fluid.wow.fadeIn.ui-sortable#sortable_portlets(ms-visible="show_volume_overview === true")
+    div.span12.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="margin:10px")
+          div.caption(style="font-weight:bold")
+            //i.ti-wallet
+            | 文件系统详情
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+            //div.btn-group.pull-right(data-toggle="buttons-radio",ms-click="clear_log")
+              //a.btn.green(href="javascript:;",ms-text="lang.clear_log",ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb")
+        div.portlet-body
+          div#volume_scroller.scroller(data-height="150px")
+            table.table.table-striped.table-hover
+              thead
+                tr
+                  th(ms-text="'名称'",style="")
+                  th(ms-text="'地址'",style="")
+                  th(ms-text="'总容量'",style="")
+                  th(ms-text="'可用容量'",style="")
+                  th(ms-text="'使用率'",style="")
+              tbody(style="color: rgb(80, 80, 80);")
+                tr(ms-repeat-e="probar")
+                  td(ms-text="e.name")
+                  td(ms-text="e.ip")
+                  td(ms-text="e.total + 'GB'")
+                  td(ms-text="e.avail + 'GB'")
+                  td(ms-html="fattr_volume_overview(e.used)",style="width: 225px;")
+
+  div.row-fluid.wow.fadeIn.ui-sortable#sortable_portlets(style="display:none")
+    div.span12.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.ti-server
+            | {{lang.title_column_cap}}
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+        div.portlet-body
+          div#column_chart(style="height: 250px;")
+          
+  div.row-fluid.wow.fadeIn.ui-sortable#sortable_portlets(style="display:none")
+    div.span12.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-drawer
+            | {{lang.title_cap}}
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+        div.portlet-body
+          div#pie_chart(style="height: 200px;")
+          
+  div.row-fluid.wow.fadeIn.ui-sortable#sortable_portlets(style="")
+    div.span12.column.sortable
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="margin:10px")
+          div.caption(style="font-weight:bold")
+            //i.ti-wallet
+            | {{lang.title_notice}}
+          div.actions
+            //div.btn-group.pull-right(data-toggle="buttons-radio",ms-click="clear_log")
+              //a.btn.green(href="javascript:;",ms-text="lang.clear_log",ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb")
+        div.portlet-body
+          div.tabbable.tabbable-custom
+            ul.nav.nav-tabs
+              li.active
+                a(class="special",href="#page_1",data-toggle="tab")
+                  i.icon-bell
+                  | {{lang.all_info}}
+              //li
+                a(class="special",href="#page_2",data-toggle="tab")
+                  i.icon-remove
+                  | {{lang.mistake}}
+              //li
+                a(class="special",href="#page_3",data-toggle="tab")
+                  i.icon-warning-sign
+                  | {{lang.warning}}
+              //li
+                a(class="special",href="#page_4",data-toggle="tab")
+                  i.icon-volume-up
+                  | {{lang.info}}
+                  
+            div.tab-content
+              div#page_1.tab-pane.active
+                div#journals-scroller-1.scroller(data-height="320px")
+                  table#log-table1.table.table-striped.table-hover
+                    thead
+                      tr
+                        th(ms-text="lang.date",style="")
+                        th(ms-text="lang.level",style="")
+                        th(ms-text="lang.status",style="")
+                        th(ms-text="lang.message",style="")
+                      //tr(id="filter")
+                        //th
+                        //th
+                        //th
+                        //th
+                    tfoot
+                    tbody(style="color: rgb(80, 80, 80);")
+                        
+              div#page_2.tab-pane
+                div#journals-scroller-2.scroller(data-height="320px")
+                  table#log-table2.table.table-striped
+                    thead
+                      tr
+                        th(ms-text="lang.date",style="")
+                        th(ms-text="lang.level",style="")
+                        th(ms-text="lang.status",style="")
+                        th(ms-text="lang.message",style="")
+                    tfoot
+                      tr
+                        th(ms-text="lang.date",style="")
+                        th(ms-text="lang.level",style="")
+                        th(ms-text="lang.status",style="")
+                        th(ms-text="lang.message",style="")
+                    tbody
+                      //tr(ms-repeat-e="journal_critical")
+                        //td(ms-text="e.created")
+                        //td(ms-html="fattr_journal_status(e.level)")
+                        //td(ms-text="e.chinese_status")
+                        //td(ms-text="e.chinese_message")
+              div#page_3.tab-pane
+                div#journals-scroller-3.scroller(data-height="320px")
+                  table#log-table3.table.table-striped
+                    thead
+                      tr
+                        th(ms-text="lang.date",style="")
+                        th(ms-text="lang.level",style="")
+                        th(ms-text="lang.status",style="")
+                        th(ms-text="lang.message",style="")
+                    tfoot
+                      tr
+                        th(ms-text="lang.date",style="")
+                        th(ms-text="lang.level",style="")
+                        th(ms-text="lang.status",style="")
+                        th(ms-text="lang.message",style="")
+                    tbody
+                      //tr(ms-repeat-e="journal_warning")
+                        //td(ms-text="e.created")
+                        //td(ms-html="fattr_journal_status(e.level)")
+                        //td(ms-text="e.chinese_status")
+                        //td(ms-text="e.chinese_message")
+              div#page_4.tab-pane
+                div#journals-scroller-4.scroller(data-height="320px")
+                  table#log-table4.table.table-striped
+                    thead
+                      tr
+                        th(ms-text="lang.date",style="")
+                        th(ms-text="lang.level",style="")
+                        th(ms-text="lang.status",style="")
+                        th(ms-text="lang.message",style="")
+                    tfoot
+                      tr
+                        th(ms-text="lang.date",style="")
+                        th(ms-text="lang.level",style="")
+                        th(ms-text="lang.status",style="")
+                        th(ms-text="lang.message",style="")
+                    tbody
+                      //tr(ms-repeat-e="journal_info")
+                        //td(ms-text="e.created")
+                        //td(ms-html="fattr_journal_status(e.level)")
+                        //td(ms-text="e.chinese_status")
+                        //td(ms-text="e.chinese_message")

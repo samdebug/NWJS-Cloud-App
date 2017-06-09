@@ -1,0 +1,21 @@
+doctype html
+div.control-group(ms-class="quickmode:on_quickmode")
+  label.control-label(ms-text="'数据磁盘'")
+  div.controls
+    div.row-fluid
+      div.tabbable.tabbable-custom.tabbable-colony(style="width:370px;")
+        ul.nav.nav-tabs(ms-each-dsu="data_dsus")
+          li(ms-class="active:$index===active_index",style="float:left")
+            a(ms-attr-href="#{{dsu.tabid}}",data-toggle="tab")
+              label.checkbox.dsu_tab_checkbox
+                input(type="checkbox",ms-click="dsu_checkbox_click",ms-data-tabid="dsu.tabid",ms-duplex-radio="dsu.checked")
+                | {{dsu.ip}}
+                span.badge.badge-success(ms-text="dsu.count",ms-visible="dsu.count>0")
+                
+        div.tab-content(style="width:370px;",ms-each-dsu="data_dsus",ms-click="disk_checkbox_click")
+          div.tab-pane(ms-attr-id="{{dsu.tabid}}",ms-class="active:$index===active_index")
+            div.disk-checkbox-col(ms-repeat-col="dsu.disks")
+              label.checkbox.tooltips(ms-repeat-disk="col",ms-data-id="dsu.tabid",ms-class="disk_offline:disk.offline",ms-title="disk_list(disk)",data-placement="right",data-html="true")
+                input(type="checkbox",ms-data-id="dsu.tabid",name="raid-disks-checkbox",ms-data-location="disk.location",ms-disabled="!disk.avail",ms-duplex-radio="disk.checked",data-dsutype="data",ms-title="disk.location")
+                | {{disk.location}}
+               

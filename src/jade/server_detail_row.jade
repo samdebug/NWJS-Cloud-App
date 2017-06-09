@@ -1,0 +1,13 @@
+doctype html
+table.table
+  thead
+    tr
+      th(ms-text="lang.th_node",style="")
+      th(ms-text="lang.th_location",style="")
+      th(ms-text="lang.th_ip",style="")
+  tbody
+    tr(ms-repeat-e="stores")
+      td(ms-text="e.node")
+      td(ms-text="e.location",style="font-weight: normal;")
+      td(ms-text="e.ip")
+      

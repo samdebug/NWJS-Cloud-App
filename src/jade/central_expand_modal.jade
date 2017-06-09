@@ -1,0 +1,68 @@
+doctype html
+div.container-fluid
+  div.portlet-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.title_store")
+  div.portlet-body      
+    div.tabbable.tabbable-custom
+      ul.nav.nav-tabs(id="myTab")
+           
+        li(style="border-top: none;border-bottom: 1px solid rgb(219, 219, 219);")
+          a(class="special",href="#page_1",style="border: none;cursor: context-menu;")
+          
+        li(style="border-top: none;border-bottom: 1px solid rgb(219, 219, 219);")
+          a(class="special",href="#page_2",style="border: none;cursor: context-menu;")
+          
+        li(style="border-top: none;border-bottom: 1px solid rgb(219, 219, 219);")
+          a(class="special",href="#page_3",style="border: none;cursor: context-menu;")
+        
+      div.tab-content()
+        div.tab-pane(id="page_1",style="height: 100%;",class="fade")
+          div.portlet-body
+            div(ms-html="fattr_process_step(1)")
+            div.control-group
+              label.control-label(ms-text="lang.step1",style="font-weight: bold;")
+              div.controls(style="padding: 0px 0px 0px 54px; width: 22px;")
+            form.dockerss.form-horizontal(action="javascripts:;",style="text-align: center;")
+             div.control-group
+               label.control-label(ms-text="lang.master_ip")
+               div.controls
+                 div.input-icon.left
+                   i.icon-cogs
+                 select#master.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options_master")
+                   option(ms-value="e.value",ms-text="e.key")
+                  
+          div.portlet-footer(style="padding-top: 56px;text-align: right;")
+            button.btn.green(type="button",ms-click="check_info(1)")
+              i.icon-ok
+              | {{lang.btn_next}}       
+            button.btn(type="button",data-dismiss="modal")
+              i.icon-remove
+              | {{lang.btn_cancel}}
+              
+        div.tab-pane(id="page_2",style="height: 100%;",class="fade")
+          div.portlet-body
+            div.control-group
+              label.control-label(ms-text="lang.step2s",style="font-weight: bold;")
+              div.controls(style="padding: 0px 0px 0px 54px; width: 22px;")
+            form.dockers(action="javascripts:;")
+              table#base-table.table.table-striped
+                thead
+                  tr
+                    th(style="width:20px")
+                      input(type="checkbox",ms-duplex-radio="all_checked")
+                    th(ms-text="lang.label_ip",style="width:200px")
+                tbody
+                  tr(ms-repeat-e="store")
+                    td
+                      input(type="checkbox",ms-duplex-radio="e.checked")
+                    td(ms-text="e.ip")
+                   
+          div.portlet-footer(style="padding-top: 50px;text-align: right;")
+            button.btn(type="button",data-dismiss="modal")
+              i.icon-remove
+              | {{lang.btn_cancel}}
+            button.btn.green(type="button",ms-click="submit")
+              i.icon-ok
+              | {{lang.btn_confirm}}       
+           

@@ -1,0 +1,58 @@
+doctype html
+div.container-fluid
+  h3.page-title(ms-html="lang.title")
+  div.row-fluid
+    div.span12
+      div.portlet.box.purple
+        div.portlet-title
+          div.caption
+            i.icon-hdd
+            | {{lang.tabletitle}}
+          div.actions(ms-if="need_format")
+            a.btn.yellow(href="javascript:;",ms-click="format_all")
+              i.icon-eraser
+              | {{lang.btn_format_all}}            
+        div.portlet-body
+          div.tabbable.tabbable-custom
+            ul.nav.nav-tabs(id="myTab")
+              li(style="font-size:15px;color:#fff;")
+                a(class="special",href="#page_1",data-toggle="tab" )
+                  | {{lang.tabletitle1}}
+
+              li(style="font-size:15px;")
+                a(class="special",href="#page_2",data-toggle="tab" )
+                  | {{lang.tabletitle2}}
+        
+            div.tab-content
+              div.tab-pane(id="page_1")
+                div.portlet-body
+                  table.table.table-hover
+                    tbody
+                      tr(ms-repeat-col="slots")
+                        td(ms-repeat-disk="col",ms-html="fattr_disk_status(disk.role,disk.raidcolor,disk.slot)",ms-title="disk_list(disk)",data-container="tr",data-toggle="tooltip",data-placement="left",data-html="true")
+                  div(ms-text="lang.mark_spare")
+                  table.table.table-striped
+                    tbody
+                      tr
+                        td(ms-repeat-e="raids",ms-html="fattr_raid_status(e.name,e.color)")       
+              div.tab-pane(id="page_2")
+                div.portlet-body
+                  table.table.table-striped
+                    thead
+                      tr
+                        th(ms-text="lang.th_location")
+                        th(ms-text="lang.th_host")
+                        th(ms-text="lang.th_health")
+                        th(ms-text="lang.th_raid")
+                        th(ms-text="lang.th_role")
+                        th(ms-text="lang.th_capacity")
+                        th(ms-text="lang.th_init")
+                    tbody
+                      tr(ms-repeat-e="disks")
+                        td {{e.location}}
+                        td(ms-html="fattr_host(e.host)")
+                        td(ms-html="fattr_health(e.health)")
+                        td(ms-text="e.raid")
+                        td(ms-html="fattr_role(e.role)")
+                        td(ms-text="fattr_cap(e.cap_sector)")
+                        td(ms-html="fattr_import(e.host)",ms-click="format_disk(e)")

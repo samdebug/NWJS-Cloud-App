@@ -1,0 +1,45 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.title")
+  div.modal-body
+    form.client.form-horizontal(action="javascripts:;")
+      div.alert.alert-error.hide
+        button.close(ms-click="close_alert")
+        span(ms-text="lang.ip_error")
+      div.control-group
+        label.control-label(ms-text="lang.label_ip")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="ip",ms-duplex="ip")
+            
+      div.control-group
+        label.control-label(ms-text="lang.label_type")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="type",ms-duplex="type",disabled)
+            
+      div.control-group
+        label.control-label(ms-text="lang.label_size")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="size",ms-duplex="size",disabled)
+            
+      div.control-group
+        label.control-label(ms-text="lang.label_version")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="version",ms-duplex="version",disabled)
+            
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

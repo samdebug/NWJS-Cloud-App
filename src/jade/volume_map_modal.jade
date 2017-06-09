@@ -1,0 +1,29 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.title")
+  div.modal-body
+    form.map-volumes.form-horizontal(novalidate="novalidate",action="javascript:;")
+      table#map-volume-table.table.table-striped
+        thead
+          tr
+            th(style="width:20px")
+              div#uniform-volume-group.checker
+                span(ms-class="checked:all_checked")
+                  input#volume-group(type="checkbox",style="opacity: 0;",ms-duplex-radio="all_checked")
+            th(ms-text="lang.th_volumes")
+        tbody(ms-each-e="volumes")
+          tr
+            td
+              div#uniform-undefined.checker
+                span(ms-class="checked: e.checked")
+                  input.volume-group(name="volume-checkbox",type="checkbox",style="opacity: 0;",ms-duplex-radio="e.checked")
+            td(ms-text="e.name")
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

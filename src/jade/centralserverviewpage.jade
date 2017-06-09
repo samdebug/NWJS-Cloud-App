@@ -1,0 +1,393 @@
+doctype html
+div.container-fluid
+  ul.breadcrumb
+    li
+      a(href="#",ms-text="'主页'",ms-click="switch_to_page('overview')")
+      i.icon-circle
+    li
+      a(ms-text="'系统概况'")
+  h3.page-title(ms-html="lang.title1")
+  div.row-fluid.wow.fadeIn
+    div.responsive.span3(data-tablet="span6",data-desktop="span3")
+      div.dashboard-stat.purple(style="background:#3598dc;border-radius: 2px !important;")
+        div.visual(style="margin-left: -35px;")
+          i.icon-group(style="opacity: 0.1;font-size: 110px;")
+        div.details(style="padding-top: 16px;")
+          div.number
+            span.countup(ms-text="on_monitor")
+            | /
+            span.countup(ms-text="process_num")
+          div.desc(ms-text="lang.process_num")
+        a.more(href="javascript:;",style="background:rgb(78, 154, 219);border-radius: 2px !important",ms-click="switch_to_page('monitor')")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+          
+    div.responsive.span3(data-tablet="span6",data-desktop="span3")
+      div.dashboard-stat.yellow(style="background:#e35b5a;border-radius: 2px !important;",ms-click="handle_log")
+        div.visual(style="margin-left: -35px;")
+          i.icon-bullhorn(style="opacity: 0.1;font-size: 110px;")
+        div.details(style="padding-top: 16px;")
+          div.number.countup(ms-text="warning_num")
+          div.desc
+            span
+              | {{lang.warning_num}}
+            //span
+              | (未处理)
+        a.more(href="javascript:;",style="background:#e04a49;border-radius: 2px !important")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+          
+    div.responsive.span3(data-tablet="span6 fix-offset",data-desktop="span3")
+      div.dashboard-stat.green(style="background:#32c5d2;border-radius: 2px !important;")
+        div.visual(style="margin-left: -35px;")
+          i.icon-desktop(style="opacity: 0.1;font-size: 110px;")
+        div.details(style="padding-top: 16px;")
+          div.number(ms-text="machine_num")
+          div.desc(ms-text="lang.machine_num")
+        a.more(href="javascript:;",style="background:rgb(49, 193, 206);border-radius: 2px !important")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+          
+    div.responsive.span3(data-tablet="span6",data-desktop="span3")
+      div.dashboard-stat.blue(style="background:#8E44AD;border-radius: 2px !important;")
+        div.visual(style="margin-left: -35px;")
+          i.icon-sitemap(style="opacity: 0.1;font-size: 110px;")
+        div.details(style="padding-top: 16px;")
+          div.number.countup(ms-text="colony_num")
+          div.desc(ms-text="lang.colony_num")
+        a.more(href="javascript:;",style="background:rgb(142, 68, 173);border-radius: 2px !important",ms-click="switch_to_page('base')")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+    
+  div.row-fluid.wow.fadeIn(id="weed",style="")
+    div.span6
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-paper-plane
+            | 实时流量
+            span(class="caption-helper",style="color: rgb(158, 172, 180);font-size: 13px;font-weight: 400;padding-left: 5px;") (MB/S)
+          div.actions
+            a.btn.btn-outline.btn-circle.green.mini(ms-click="open_capture",href="javascript:;")
+              | 开启抓包
+            a.btn.btn-outline.btn-circle.green.mini(ms-click="close_capture",href="javascript:;")
+              | 关闭抓包
+          //div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+            //div.btn-group.pull-right(data-toggle="buttons-radio")
+              //a.btn.blue.mini(id="current",href="javascript:;",ms-text="'实时'",ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb",style="font-size: 13px !important;height: 17px;color: rgb(77, 144, 254);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+              //a.btn.blue.mini(id="plus",href="javascript:;",ms-text="'累计'",ms-class="active:flow_type=='fread_mb'",data-flow-type="fread_mb",style="font-size: 13px !important;height: 17px;color: rgb(77, 144, 254);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+        
+        div.portlet-body(style="")
+          div(style="")
+            div.span6(style="text-align: center;padding: 20px 0px 20px 0px;")
+              div(style="font-family: 'bebas';font-size: 25px;color: rgb(98, 168, 234);",ms-text="total_read + 'MB'")
+              div(style="color: rgb(141, 141, 141);") 累计读流量
+              
+            div.span6(style="text-align: center;padding: 20px 0px 20px 0px;")
+              div(style="font-family: 'bebas';font-size: 25px;color: rgb(98, 168, 234);",ms-text="total_write + 'MB'")
+              div(style="color: rgb(141, 141, 141);") 累计写流量
+              
+          div#load_stats_content(style="display: block;padding-top: 105px;")
+            div#flow_stats_in(style="height: 330px;font-size: 14px;")
+            
+    div.span6
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-pie-chart
+            | 服务指标
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+        div.portlet-body(style="")
+          div(style="height:435px")
+            div(style="padding: 10px;border-bottom: 1px solid rgb(243, 243, 243);")
+              span6
+                span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="per_weed_cpu ")
+                span
+                  div(ms-html="fattr_view_status(per_weed_cpu,alarm,'minio处理器占用率','export')")
+                span(style="display: block;color:rgb(141,141,141)") 
+                  i.icon-feed
+                  | minio(cpu)
+              span6.hastip(ms-click="show_detail_modal",style="cursor:pointer;float: right;margin-top: -40px;",title="点击查看详情")
+                div(id="mini_weed_cpu_server",style=" display: inline-block; width: 22px; height: 20px;")
+                //div(id="bar",class="progress progress-success progress-striped active")
+                  //div(id="pro_weed_cpu",class="bar",style="")
+ 
+            div(style="padding: 10px;border-bottom: 1px solid rgb(243, 243, 243);")
+              span6
+                span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="per_weed_mem ")
+                span
+                  div(ms-html="fattr_view_status(per_weed_mem,alarm,'minio内存占用率','export')")
+                span(style="display: block;color:rgb(141,141,141)") 
+                  i.icon-fire
+                  | minio(mem)
+              span6.hastip(ms-click="show_detail_modal",style="cursor:pointer;float: right;margin-top: -40px;",title="点击查看详情")
+                div(id="mini_weed_mem_server",style=" display: inline-block; width: 22px; height: 20px;")
+                //div(id="bar",class="progress progress-success progress-striped active")
+                  //div(id="pro_weed_mem",class="bar",style="")
+                  
+            div(style="padding: 10px;border-bottom: 1px solid rgb(243, 243, 243);")
+              span6
+                span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="per_docker + '%'")
+                span
+                  div(ms-html="fattr_view_status(per_docker,alarm,'docker文件夹容量','export')")
+                span(style="display: block;color:rgb(141,141,141)") 
+                  i.icon-folder-close-alt
+                  | docker文件夹容量
+              span6.hastip(ms-click="show_detail_modal",style="cursor:pointer;float: right;margin-top: -40px;",title="点击查看详情")
+                div(id="mini_docker_server",style=" display: inline-block; width: 22px; height: 20px;")
+         
+            div(style="padding: 10px;border-bottom: 1px solid rgb(243, 243, 243);")
+              span6
+                span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="per_tmp+ '%'")
+                span
+                  div(ms-html="fattr_view_status(per_tmp,alarm,'tmp文件夹容量','export')")
+                span(style="display: block;color:rgb(141,141,141)") 
+                  i.icon-folder-close-alt
+                  | tmp文件夹容量
+              span6.hastip(ms-click="show_detail_modal",style="cursor:pointer;float: right;margin-top: -40px;",title="点击查看详情")
+                div(id="mini_tmp_server",style=" display: inline-block; width: 22px; height: 20px;")
+    
+            div(style="padding: 10px;")
+              span6
+                span(style="font-family: 'bebas';font-size: 25px;color:rgb(98, 168, 234)",ms-text="per_var+ '%'")
+                span
+                  div(ms-html="fattr_view_status(per_var,alarm,'var文件夹容量','export')")
+                span(style="display: block;color:rgb(141,141,141)") 
+                  i.icon-folder-close-alt
+                  | var文件夹容量
+              span6.hastip(ms-click="show_detail_modal",style="cursor:pointer;float: right;margin-top: -40px;",title="点击查看详情")
+                div(id="mini_var_server",style=" display: inline-block; width: 22px; height: 20px;")
+            
+  div.row-fluid.wow.fadeIn
+    div.span12
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="padding: 12px 10px 17px;padding-bottom: 0px;")
+          div.caption(style="font-weight:bold")
+            //i.icon-paper-plane
+            | {{lang.title_machine}}
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+            
+        div.portlet-body(style="")
+          div(style="height:150px")
+            div.span4
+              div.span6.hastip(ms-click="show_detail_modal",style="cursor:pointer",title="点击查看详情")
+                div.charts(style="padding-top: 22px;padding-left: 40px;")
+                  svg(id="fillgauge1",width="80",height="80")
+                  
+              div.span6
+                div.num(style="margin-top: 27px;")
+                  div(ms-text="'处理器'",style="text-align: center;color:rgb(141, 141, 141)")
+                  div(ms-text="cpu_load + '%'",style="text-align: center;font-family: 'bebas';font-size: 25px;padding: 7px;color: rgb(87, 199, 212)")
+                  div(ms-html="fattr_view_status(cpu_load,alarm,'处理器','export')",style="text-align: center;")
+              div#flot_cpu(style="height:50px;")
+            
+            div.span4(style="border-left: 1px solid rgb(235, 235, 235);height: 122px;")
+              div.span6.hastip(ms-click="show_detail_modal",style="cursor:pointer",title="点击查看详情")
+                div.charts(style="padding-top: 22px;padding-left: 40px;")
+                  svg(id="fillgauge2",width="80",height="80")
+                
+              div.span6
+                div.num(style="margin-top: 27px;")
+                  div(ms-text="'系统盘容量'",style="text-align: center;color:rgb(141, 141, 141)")
+                  div(ms-text="cache_load + '%'",style="text-align: center;font-family: 'bebas';font-size: 25px;padding: 7px;color: rgb(98, 168, 234)")
+                  div(ms-html="fattr_view_status(cache_load,alarm,'系统盘容量','export')",style="text-align: center;")
+              div#flot_cache(style="height:50px;")
+          
+            div.span4(style="border-left: 1px solid rgb(235, 235, 235);height: 122px;")
+              div.span6.hastip(ms-click="show_detail_modal",style="cursor:pointer",title="点击查看详情")
+                div.charts(style="padding-top: 22px;padding-left: 40px;")
+                  svg(id="fillgauge3",width="80",height="80")
+                  
+              div.span6
+                div.num(style="margin-top: 27px;")
+                  div(ms-text="'内存'",style="text-align: center;color:rgb(141, 141, 141)")
+                  div(ms-text="mem_load + '%'",style="text-align: center;font-family: 'bebas';font-size: 25px;padding: 7px;color: rgb(146, 109, 222)")
+                  div(ms-html="fattr_view_status(mem_load,alarm,'内存','export')",style="text-align: center;")
+              div#flot_mem(style="height:50px;")
+                        
+  div.row-fluid.wow.fadeIn(style="display:none")
+    div.span12
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="margin:10px")
+          div.caption(style="font-weight:bold")
+            //i.ti-wallet
+            | {{lang.title_notice}}
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+            //div.btn-group.pull-right(data-toggle="buttons-radio",ms-click="clear_log")
+              //a.btn.green(href="javascript:;",ms-text="lang.clear_log",ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb")
+        div.portlet-body
+          section(id="cd-timeline",class="cd-container")
+            div.cd-timeline-block
+              div.cd-timeline-img.cd-picture
+                i.icon-twitter(style="font-size: 25px;padding-left: 19px;line-height: 2.5;color: rgb(255, 255, 255);")
+              div.cd-timeline-content
+                h2 时间表
+                p 2017年3月21号,存储192.168.2.89 磁盘损坏
+                a(href="#",class="cd-read-more") 阅读更多
+                span.cd-date 
+                  | Jan 14
+              
+            div.cd-timeline-block
+              div.cd-timeline-img.cd-picture
+                i.icon-twitter(style="font-size: 25px;padding-left: 19px;line-height: 2.5;color: rgb(255, 255, 255);")
+              div.cd-timeline-content
+                h2 时间表
+                p 2017年3月21号,存储192.168.2.89 磁盘损坏
+                a(href="#",class="cd-read-more") 阅读更多
+                span.cd-date 
+                  | Jan 15
+              
+            div.cd-timeline-block
+              div.cd-timeline-img.cd-picture
+                i.icon-twitter(style="font-size: 25px;padding-left: 19px;line-height: 2.5;color: rgb(255, 255, 255);")
+              div.cd-timeline-content
+                h2 时间表
+                p 2017年3月21号,存储192.168.2.89 磁盘损坏
+                a(href="#",class="cd-read-more") 阅读更多
+                span.cd-date 
+                  | Jan 16
+              
+            div.cd-timeline-block
+              div.cd-timeline-img.cd-picture
+                i.icon-twitter(style="font-size: 25px;padding-left: 19px;line-height: 2.5;color: rgb(255, 255, 255);")
+              div.cd-timeline-content
+                h2 时间表
+                p 2017年3月21号,存储192.168.2.89 磁盘损坏
+                a(href="#",class="cd-read-more") 阅读更多
+                span.cd-date 
+                  | Jan 17
+                  
+  div.row-fluid.wow.fadeIn(style="display:none")
+    div.span12
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="margin:10px")
+          div.caption(style="font-weight:bold")
+            //i.ti-wallet
+            | {{lang.title_notice}}
+          div.tools
+            a(href="javascript:;",class="collapse")
+            a(href="javascript:;",class="reload")
+            a(href="javascript:;",class="remove")
+            //div.btn-group.pull-right(data-toggle="buttons-radio",ms-click="clear_log")
+              //a.btn.green(href="javascript:;",ms-text="lang.clear_log",ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb")
+        div.portlet-body
+          div.main
+            ul.cbp_tmtimeline(ms-each-e="logs")
+              div#scroller_timeline.scroller(data-height="320px")
+                li
+                  time(class="cbp_tmtime",datetime="2013-04-10 18:30")
+                    span
+                    | {{e.date}}
+                    span
+                    | {{e.time}}
+                  div(class="cbp_tmicon")
+                    i.icon-pin
+                  div(class="cbp_tmlabel")
+                    //h3 Ricebean black-eyed pea
+                    p(ms-text="e.chinese_message")
+  
+  div.row-fluid.wow.fadeIn(style="")
+    div.span12
+      div.portlet.solid.bordered.light-grey(style="border: 1px solid rgb(228, 228, 228);background: rgb(255, 255, 255) !important;")
+        div.portlet-title(style="margin:10px")
+          div.caption(style="font-weight:bold")
+            //i.ti-wallet
+            | {{lang.title_notice}}
+          div.actions
+            //div.btn-group.pull-right(data-toggle="buttons-radio",ms-click="clear_log")
+              //a.btn.green(href="javascript:;",ms-text="lang.clear_log",ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb")
+        div.portlet-body
+          div.tabbable.tabbable-custom
+            ul.nav.nav-tabs
+              li.active
+                a(class="special",href="#page_1",data-toggle="tab")
+                  i.icon-bell
+                  | {{lang.all_info}}
+              //li
+                a(class="special",href="#page_2",data-toggle="tab")
+                  i.icon-remove
+                  | {{lang.mistake}}
+              //li
+                a(class="special",href="#page_3",data-toggle="tab")
+                  i.icon-warning-sign
+                  | {{lang.warning}}
+              //li
+                a(class="special",href="#page_4",data-toggle="tab")
+                  i.icon-volume-up
+                  | {{lang.info}}
+            div.tab-content
+              div#page_1.tab-pane.active
+                div#journals-scroller-1.scroller(data-height="320px")
+                  table#log-table1.table.table-striped.table-hover
+                    thead
+                      tr
+                        th(ms-text="lang.date",style="")
+                        th(ms-text="lang.level",style="")
+                        th(ms-text="lang.status",style="")
+                        th(ms-text="lang.message",style="")
+                      //tr(id="filter")
+                        //th
+                        //th
+                        //th
+                        //th
+                    tfoot
+                    tbody(style="color: rgb(80, 80, 80);")
+                        
+              div#page_2.tab-pane
+                div#journals-scroller-2.scroller(data-height="320px")
+                  table#log-table2.table.table-striped
+                    thead
+                      tr
+                        th(ms-text="lang.date",style="width:134px;")
+                        th(ms-text="lang.level",style="width:45px;")
+                        th(ms-text="lang.status",style="width:45px;")
+                        th(ms-text="lang.message",style="width: 540px;")
+                    tbody
+                      tr(ms-repeat-e="journal_critical")
+                        td(ms-text="e.created")
+                        td(ms-html="fattr_journal_status(e.level)")
+                        td(ms-text="e.chinese_status")
+                        td(ms-text="e.chinese_message")
+                        
+              div#page_3.tab-pane
+                div#journals-scroller-3.scroller(data-height="320px")
+                  table#log-table3.table.table-striped
+                    thead
+                      tr
+                        th(ms-text="lang.date",style="width:134px;")
+                        th(ms-text="lang.level",style="width:45px;")
+                        th(ms-text="lang.status",style="width:45px;")
+                        th(ms-text="lang.message",style="width: 540px;")
+                    tbody
+                      tr(ms-repeat-e="journal_warning")
+                        td(ms-text="e.created")
+                        td(ms-html="fattr_journal_status(e.level)")
+                        td(ms-text="e.chinese_status")
+                        td(ms-text="e.chinese_message")
+              div#page_4.tab-pane
+                div#journals-scroller-4.scroller(data-height="320px")
+                  table#log-table4.table.table-striped
+                    thead
+                      tr
+                        th(ms-text="lang.date",style="width:134px;")
+                        th(ms-text="lang.level",style="width:45px;")
+                        th(ms-text="lang.status",style="width:45px;")
+                        th(ms-text="lang.message",style="width: 540px;")
+                    tbody
+                      tr(ms-repeat-e="journal_info")
+                        td(ms-text="e.created")
+                        td(ms-html="fattr_journal_status(e.level)")
+                        td(ms-text="e.chinese_status")
+                        td(ms-text="e.chinese_message")

@@ -1,0 +1,19 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal")
+    h3(ms-text="warn.title")
+  div.modal-body
+    div.alert.alert-block.alert-error.fade.in
+      h4.alert-heading(ms-text="warn.heading")
+      p(ms-text="warn.alert1")
+      p(ms-text="warn.alert2")
+    div
+      p(ms-text="message")
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal",ms-click="cancel")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",data-dismiss="modal",ms-click="submit_confirm")
+      i.icon-ok
+      | {{lang.btn_confirm}}

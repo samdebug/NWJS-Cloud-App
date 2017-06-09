@@ -1,0 +1,57 @@
+doctype html
+div
+  div.modal-header
+    h3(ms-text="lang.title")
+  div.modal-body
+    form.raid.form-horizontal(action="javascript:;")
+      div.row-fluid
+        div.control-group
+          label.control-label(ms-text="lang.label_name")
+          div.controls
+            div.input-icon.left
+              i.icon-tasks
+              input.m-wrap.tooltips(name="name",type="text",data-trigger="hover",ms-data-original-title="lang.tooltips_name",data-placement="right",ms-duplex="name")
+              
+        div.control-group
+          label.control-label(ms-text="lang.label_level")
+          div.controls
+            label.radio
+              input(type="radio",name="level",value="0",ms-duplex-text="level")
+              | 0
+            label.radio
+              input(type="radio",name="level",value="1",ms-duplex-text="level")
+              | 1
+            label.radio
+              input(type="radio",name="level",value="5",ms-duplex-text="level")
+              | 5
+            label.radio
+              input(type="radio",name="level",value="6",ms-duplex-text="level")
+              | 6
+            label.radio
+              input(type="radio",name="level",value="10",ms-duplex-text="level")
+              | 10
+        div#dsuui
+        div.control-group
+          label.control-label(ms-text="lang.label_rebuild_priority")
+          div.controls
+            label.radio
+              input(type="radio",name="rebuild_priority",value="low",ms-duplex-text="rebuild_priority")
+              | {{lang.label_rebuild_priority_low}}
+            label.radio
+              input(type="radio",name="rebuild_priority",value="middle",ms-duplex-text="rebuild_priority")
+              | {{lang.label_rebuild_priority_middle}}
+            label.radio
+              input(type="radio",name="rebuild_priority",value="high",ms-duplex-text="rebuild_priority")
+              | {{lang.label_rebuild_priority_high}}
+        div.control-group
+          label.control-label(ms-text="lang.label_sync")
+          div.controls
+            div.basic-toggle-button.toggle-button
+              input#sync(type="checkbox")
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

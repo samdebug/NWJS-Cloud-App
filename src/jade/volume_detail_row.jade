@@ -1,0 +1,12 @@
+doctype html
+table.table.table-condensed.table-hover
+  thead
+    tr
+      th #
+      th(ms-text="lang.th_wwn")
+      th(ms-text="lang.th_session")
+  tbody
+    tr(ms-repeat-e="initrs")
+      td(ms-text="$index")
+      td(ms-html="e.wwn")
+      td(ms-html="fattr_active_session(e.active_session)")

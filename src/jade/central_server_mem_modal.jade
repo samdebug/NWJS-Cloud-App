@@ -1,0 +1,30 @@
+doctype html
+div.container-fluid
+  h3.page-title
+  div.row-fluid
+    div.span12          
+      div.portlet.box.grey-gallery
+        div.portlet-title
+          div.caption
+            | {{lang.title}}
+          div.actions
+        div.portlet-body
+          form.cloud.form-horizontal(novalidate="novalidate",action="javascript:;")
+            div#journals-scroller.scroller(data-height="320px")
+              table#mem-table.table.table-striped
+                thead
+                  tr
+                    th(ms-text="lang.label_process",style="font-weight: bolder;")
+                    th(ms-text="lang.label_mem",style="font-weight: bolder;")
+                tbody(ms-each-e="mem")
+                  tr
+                    td(ms-text="e.protype")
+                    td(ms-text="e.mem")
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}
+       

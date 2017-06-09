@@ -1,0 +1,37 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.title")
+  div.modal-body
+    form.manual.form-horizontal(action="javascripts:;")
+      div.control-group
+        label.control-label(ms-text="lang.master_ip")
+        div.controls
+          div.input-icon.left
+            i.icon-cogs
+          select#master.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options_master")
+            option(ms-value="e.value",ms-text="e.key")
+            
+      div.control-group
+        label.control-label(ms-text="lang.backup_ip")
+        div.controls
+          div.input-icon.left
+            i.icon-cogs
+          select#backup.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options_backup")
+            option(ms-value="e.value",ms-text="e.key")
+            
+      div.control-group
+        label.control-label(ms-text="lang.new_ip")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="ip",ms-duplex="message",disabled)
+            
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

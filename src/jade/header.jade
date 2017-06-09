@@ -1,0 +1,80 @@
+doctype html
+ul.nav.navbar.pull-right
+  li.dropdown(ms-click="broadcast")
+    a.frameless-header.dropdown-toggle(href="javascript:;",ms-if="show_server")
+      span.label.label-info
+        | 搜寻
+  li.dropdown(ms-click="add_machine",ms-if="show_server")
+    a.frameless-header.dropdown-toggle(href="javascript:;")
+      span.label.label-warning
+        | 添加
+  li.dropdown(ms-click="server_switch",ms-if="show_server")
+    a.frameless-header.dropdown-toggle(href="javascript:;")
+      span.label.label-server
+        | 服务
+        
+  li.dropdown#log_event(style="display:none;")
+    a.frameless-header.dropdown-toggle.wave(href="#",data-toggle="dropdown",style="height:29px")
+      button#login-btn.btn.own.pull-right(type="button",style="border: 0px;padding: 6px;")
+        i.icon-bell
+      span(class="badge",ms-text="num_log")
+    ul.dropdown-menu.extended.notification
+      div#journals.scroller(data-height="320px")
+        table#log.table.table-striped
+          li
+            a(href="#")
+              span.label.label-warning
+                i.icon-bell
+              | 你有一条告警信息
+              span.time
+                | 刚刚
+          li
+            a(href="#")
+              span.label.label-important
+                i.icon-bell
+              | 你有一条告警信息
+              span.time
+                | 刚刚
+          li
+            a(href="#")
+              span.label.label-warning
+                i.icon-bell
+              | 你有一条告警信息
+              span.time
+                | 刚刚
+          li
+            a(href="#")
+              span.label.label-warning
+                i.icon-bell
+              | 你有一条告警信息
+              span.time
+                | 刚刚
+          li
+            a(href="#")
+              span.label.label-warning
+                i.icon-bell
+              | 你有一条告警信息
+              span.time
+                | 刚刚
+        
+  li(ms-click="add_machine",style="display:none",id="logout_btn")
+    a.frameless-header.dropdown-toggle.wave(href="javascript:;",style="height: 30px;")
+      i.icon-logout(style="padding-top: 7px;")
+        
+  li(ms-click="refresh")
+    a.frameless-header.dropdown-toggle.wave(href="javascript:;",style="height:30px")
+      i.icon-refresh(style="padding-top: 7px;")
+        
+  li(ms-click="mini_window")
+    a.frameless-header.dropdown-toggle.wave(href="javascript:;",style="height:30px")
+      i.icon-minus(style="padding-top: 7px;")
+        
+  li(ms-click="resize_window")
+    a.frameless-header.dropdown-toggle.wave(href="javascript:;",style="height:30px")
+      i(ms-class="icon-size-fullscreen:!fullscreen",ms-class-1="icon-size-actual:fullscreen",style="padding-top: 7px;")
+        
+  li(ms-click="close_window")
+    a.frameless-header.dropdown-toggle.wave(href="javascript:;",style="height:30px")
+      i.icon-close(style="padding-top: 7px;")
+
+

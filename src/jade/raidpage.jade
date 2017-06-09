@@ -1,0 +1,50 @@
+doctype html
+div.container-fluid
+  h3.page-title(ms-html="lang.title")
+  div.row-fluid
+    div.span12
+      div.portlet.box.yellow
+        div.portlet-title
+          div.caption
+            i.icon-tasks
+            | {{lang.tabletitle}}
+          div.actions
+            a.btn.purple(href="javascript:;",ms-click="set_disk_role")
+              i.icon-plus
+              | {{lang.set_disk_role_btn}}
+            | &nbsp;
+            a.btn.green(href="javascript:;",ms-click="create_raid")
+              i.icon-plus
+              | {{lang.create_btn}}
+            | &nbsp;
+            a.btn.red(href="javascript:;",ms-click="delete_raid")
+              i.icon-trash
+              | {{lang.delete_btn}}
+        div.portlet-body
+          table#raid-table.table.table-striped
+            thead
+              tr
+                th(style="width:20px")
+                  input(type="checkbox",ms-duplex-radio="all_checked")
+                th(ms-text="lang.th_detail",style="width:40px")
+                th(ms-text="lang.th_name")
+                th(ms-text="lang.th_level")
+                th(ms-text="lang.th_chunk")
+                th(ms-text="lang.th_health")
+                th(ms-text="lang.th_rqrcount")
+                th(ms-text="lang.th_rebuilding")
+                th(ms-text="lang.th_cap_usage")
+            tbody
+              tr(ms-repeat-e="raids")
+                td
+                  input(type="checkbox",ms-duplex-radio="e.checked")
+                td
+                  span.row-details(ms-click="detail",ms-class="row-details-close:e.detail_closed",ms-class-1="row-details-open:!e.detail_closed")
+                td(ms-text="e.name")
+                td(ms-text="e.level")
+                td(ms-text="e.chunk_kb")
+                td(ms-html="fattr_health(e.health)")
+                td(ms-text="e.rqr_count")
+                td(ms-html="fattr_rebuilding(e.rebuilding, e.rebuild_progress)")
+                td
+                  div.progress(ms-html="fattr_cap_usage(e.cap_sector,e.used_cap_sector)")

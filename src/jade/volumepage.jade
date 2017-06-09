@@ -1,0 +1,76 @@
+doctype html
+div.container-fluid
+  h3.page-title(ms-html="lang.title")
+  div.row-fluid
+    div.span12
+      div.portlet.box.green
+        div.portlet-title
+          div.caption
+            i.icon-list-alt
+            | {{lang.tabletitle}}
+          div.actions
+            a.btn.yellow(href="javascript:;",ms-click="create_volume")
+              i.icon-plus
+              | {{lang.create_btn}}
+            | &nbsp;
+            a.btn.red(href="javascript:;",ms-click="delete_volume")
+              i.icon-trash
+              | {{lang.delete_btn}}
+        div.portlet-body
+          table#volume-table.table.table-striped
+            thead
+              tr
+                th(style="width:20px")
+                  input(type="checkbox",ms-duplex-radio="all_checked")
+                th(ms-text="lang.th_detail",style="width:40px")
+                th(style="width:100px",ms-text="lang.th_name")
+                th(style="width:100px",ms-text="lang.th_health")
+                th(style="width:100px",ms-text="lang.th_syn",ms-visible="show_sync")
+                th(style="width:100px",ms-text="lang.th_fs",ms-visible="show_fs")
+                
+                th(style="width:50px",ms-text="lang.th_capacity")
+                
+                th(style="width:100px",ms-text="lang.th_precreate",ms-visible="show_precreate")                
+                th(style="width:100px",ms-text="lang.th_forward_server",ms-visible="show_precreate")
+                th(style="width:100px",ms-text="lang.th_store_server",ms-visible="show_precreate")                
+            tbody
+              tr(ms-repeat-e="volumes")
+                td
+                  input(type="checkbox",ms-duplex-radio="e.checked")
+                td
+                  span.row-details(ms-click="detail",ms-class="row-details-close:e.detail_closed",ms-class-1="row-details-open:!e.detail_closed")
+                td(ms-text="e.name")
+                td(ms-html="fattr_health(e.health)")
+                td(ms-visible="show_sync")
+                  div(ms-html="fattr_synchronizing(e)",ms-click="sync_switch(e)")
+
+                td(ms-visible="show_fs")
+                  a.btn.mini.green(href="javascript:;",ms-click="enable_fs(e)",ms-if="e.fs_action==='enable'")
+                    i.icon-ok
+                    | {{lang.btn_enable_fs}}
+                  a.btn.mini.red(href="javascript:;",ms-click="disable_fs(e)",ms-if="e.fs_action==='disable'")
+                    i.icon-trash
+                    | {{lang.btn_disable_fs}}
+                  a.btn.mini(href="javascript:;",ms-if="e.fs_action==='unavail'")
+                    | {{lang.btn_unavail_fs}}
+                    
+                td(ms-text="fattr_cap(e.cap_sector)")
+                
+                td(ms-visible="show_precreate")
+                  a.btn.mini.green(href="javascript:;",ms-click="pre_create(e)",ms-if="e.precreate_action == 'enable_precreate'")
+                    i.icon-ok
+                    | {{lang.btn_enable_fs}}
+                  div(ms-html="fattr_precreating(e.precreate_progress)",ms-if="e.precreate_action == 'precreating'")
+                  a.btn.mini.yellow(href="javascript:;",ms-if="e.precreate_action=='unavail'")
+                    | {{lang.btn_precreate_unavail}}
+                td(ms-visible="show_precreate")
+                  a.btn.mini.green(href="javascript:;",ms-click="server_start(false)")
+                    i.icon-ok
+                    | {{lang.btn_enable_fs}}
+                  a.btn.mini.red(href="javascript:;",ms-click="server_stop(false)",ms-if="false")
+                    i.icon-ok
+                    | {{lang.btn_stop_server}}                    
+                td(ms-visible="show_precreate")
+                  a.btn.mini.green(href="javascript:;",ms-click="server_start(true)")
+                    i.icon-ok
+                    | {{lang.btn_enable_fs}}                     

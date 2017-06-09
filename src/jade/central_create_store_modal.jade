@@ -1,0 +1,126 @@
+doctype html
+div.container-fluid
+  div.portlet-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.title")
+  div.portlet-body      
+    div.tabbable.tabbable-custom
+      ul.nav.nav-tabs(id="myTab")
+        li(style="border-top: none;border-bottom: 1px solid rgb(219, 219, 219);")
+          a(class="special",href="#page_1",style="border: none;cursor: context-menu;")
+           
+        li(style="border-top: none;border-bottom: 1px solid rgb(219, 219, 219);")
+          a(class="special",href="#page_2",style="border: none;cursor: context-menu;")
+        
+        li(style="border-top: none;border-bottom: 1px solid rgb(219, 219, 219);")
+          a(class="special",href="#page_3",style="border: none;cursor: context-menu;")
+        
+        li(style="border-top: none;border-bottom: 1px solid rgb(219, 219, 219);")
+          a(class="special",href="#page_4",style="border: none;cursor: context-menu;")
+          
+      div.tab-content()
+        div.tab-pane(id="page_1",style="height: 100%;",class="fade")
+          div.portlet-body
+            div(ms-html="fattr_process_step(1)")
+            div.control-group
+              label.control-label(ms-text="lang.step1",style="font-weight: bold;")
+              div.controls(style="padding: 0px 0px 0px 54px; width: 22px;")
+            form.dockerss.form-horizontal(action="javascripts:;",style="text-align: center;")
+              div.control-group
+                label.radio
+                  input(type="radio",name="option",value="auto",ms-duplex-text="option")
+                  | {{ lang.label_auto }}
+                  
+              div.control-group(style="margin-left: -40px;")
+                label.radio
+                  input(type="radio",name="option",value="manual",ms-duplex-text="option")
+                  | {{ lang.label_manual }}
+                  
+          div.portlet-footer(style="padding-top: 56px;text-align: right;")
+            button.btn.green(type="button",ms-click="check_info(1)")
+              i.icon-ok
+              | {{lang.btn_next}}       
+            button.btn(type="button",data-dismiss="modal")
+              i.icon-remove
+              | {{lang.btn_cancel}}
+    
+        div.tab-pane(id="page_2",style="height: 100%;",class="fade")
+          div.portlet-body
+            div(ms-html="fattr_process_step(2)")
+            div.control-group
+              label.control-label(ms-text="lang.step2",style="font-weight: bold;")
+              div.controls(style="padding: 0px 0px 0px 54px; width: 22px;")
+            form.docker.form-horizontal(action="javascripts:;")
+              div.control-group
+                label.control-label(ms-text="lang.label_start")
+                div.controls
+                  div.input-icon.left
+                    i.icon-pencil
+                    input.m-wrap(type="text",name="start_ip",ms-duplex="start_ip")
+                    
+              div.control-group
+                label.control-label(ms-text="lang.label_number")
+                div.controls
+                  div.input-icon.left
+                    i.icon-pencil
+                    input.m-wrap(type="text",name="number_ip",ms-duplex="number_ip")
+             
+          div.portlet-footer(style="padding-top: 56px;text-align: right;")
+            button.btn(type="button",ms-click="check_info(0)")
+              i.icon-undo
+              | {{lang.btn_last}}
+            button.btn.green(type="button",ms-click="check_info(3)")
+              i.icon-ok
+              | {{lang.btn_next}}       
+            button.btn(type="button",data-dismiss="modal")
+              i.icon-remove
+              | {{lang.btn_cancel}}
+            
+        div.tab-pane(id="page_3",style="height: 100%;",class="fade")
+          div.portlet-body
+            div(ms-html="fattr_process_step(2)")
+            div.control-group
+              label.control-label(ms-text="lang.step3",style="font-weight: bold;")
+              div.controls(style="padding: 0px 0px 0px 54px; width: 22px;")
+            form.dockers(action="javascripts:;")
+              div.control-group
+                textarea(name="text_ip",ms-duplex="text_ip",style="min-width: 300px;min-height: 100px;max-width: 470px;")
+                   
+          div.portlet-footer(style="padding-top: 56px;text-align: right;")
+            button.btn(type="button",ms-click="check_info(0)")
+              i.icon-undo
+              | {{lang.btn_last}}
+            button.btn.green(type="button",ms-click="check_info(3)")
+              i.icon-ok
+              | {{lang.btn_next}}       
+            button.btn(type="button",data-dismiss="modal")
+              i.icon-remove
+              | {{lang.btn_cancel}}
+            
+        div.tab-pane(id="page_4",style="",class="fade")
+          div.portlet-body
+            div(ms-html="fattr_process_step(3)")
+            div.control-group
+              label.control-label(ms-text="lang.step4",style="font-weight: bold;")
+              div.controls(style="padding: 0px 0px 0px 54px; width: 22px;")
+            form.dockers.form-horizontal(action="javascripts:;")
+              div.alert.alert-error.hide
+                button.close(ms-click="close_alert")
+                span(ms-text="lang.ip_error")
+              div.control-group
+                div.caption(style="padding:5px;")
+                  div(style="font-weight: bold;")
+                    | {{lang.label_worker}}
+                    | {{ips}}
+                    
+          div.portlet-footer(style="padding-top: 50px;text-align: right;")
+            button.btn(type="button",ms-click="check_info(2)")
+              i.icon-undo
+              | {{lang.btn_last}}
+            button.btn.green(type="button",ms-click="submit")
+              i.icon-ok
+              | {{lang.btn_confirm}}       
+            button.btn(type="button",data-dismiss="modal")
+              i.icon-remove
+              | {{lang.btn_cancel}}
+            

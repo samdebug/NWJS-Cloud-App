@@ -1,0 +1,37 @@
+doctype html
+div.container-fluid
+  h3.page-title
+  div.row-fluid
+    div.span12          
+      div.portlet.box.grey
+        div.portlet-title
+          div.caption
+            | {{lang.title}}
+          div.actions
+        div.portlet-body
+          form.cloud.form-horizontal(novalidate="novalidate",action="javascript:;")
+            div#journals-scroller.scroller(data-height="320px")
+              table#raid-table.table.table-striped
+                thead
+                  tr
+                    th(ms-text="lang.label_name",style="font-weight: bolder;")
+                    th(ms-text="lang.label_level",style="font-weight: bolder;")
+                    th(ms-text="lang.label_health",style="font-weight: bolder;")
+                    th(ms-text="lang.label_cap",style="font-weight: bolder;")
+                    th(ms-text="lang.label_used_cap",style="font-weight: bolder;")
+                tbody(ms-each-e="raids")
+                  tr
+                    td(ms-text="e.Name")
+                    td(ms-text="e.Level")
+                    td(ms-text="e.Health")
+                    td(ms-text="e.Cap")
+                    td(ms-text="e.Used_Cap")
+                    
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}
+       

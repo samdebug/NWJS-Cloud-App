@@ -1,0 +1,34 @@
+doctype html
+div.container-fluid
+  div.logo
+    img(src="images/logo-big.png")
+  div.content
+    form.form-vertical.login-form(action="javascript:;")
+      h3.form-title(ms-text="lang.title")
+      div.alert.alert-error.hide
+        button.close(ms-click="close_alert")
+        span(ms-text="lang.login_error")
+      div.control-group
+        label.control-label(ms-text="lang.label_device")
+        div.controls
+          div.input-icon.left
+            i.icon-cogs
+            input#login-ip.m-wrap(type="text",name="device",data-provide="typeahead",ms-duplex="device",ms-keypress="keypress")
+      div.control-group
+        label.control-label(ms-text="lang.label_username")
+        div.controls
+          div.input-icon.left
+            i.icon-user
+            input.m-wrap(type="text",name="username",ms-duplex="username",ms-keypress="keypress")
+      div.control-group
+        label.control-label(ms-text="lang.label_passwd")
+        div.controls
+          div.input-icon.left
+            i.icon-lock
+            input.m-wrap(type="password",name="passwd",ms-duplex="passwd",ms-keypress="keypress")
+      div.form-actions
+        button#login-btn.btn.blue.pull-right(type="button",ms-click="submit")
+          | {{lang.btn_login}}
+          i.m-icon-swapright.m-icon-white
+  div.copyright
+    | {{lang.copyright}}

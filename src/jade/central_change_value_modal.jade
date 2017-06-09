@@ -1,0 +1,40 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h4(ms-text="'修改'")
+  div.modal-body
+    form.change_value.form-horizontal(action="javascripts:;")
+      div.control-group
+        label.control-label(ms-text="'类型'")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="name",ms-duplex="message",disabled)
+            
+      div.control-group
+        label.control-label(ms-text="'作用'")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="type",ms-duplex="apply",disabled)
+            
+      div.control-group
+        label.control-label(ms-text="lang.label_normal")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="normal",ms-duplex="normal")
+      div.control-group
+        label.control-label(ms-text="lang.label_bad")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="bad",ms-duplex="bad")
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

@@ -1,0 +1,46 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h4(ms-text="lang.title")
+  div.modal-body
+    form.create.form-horizontal(action="javascripts:;")
+      div.alert.alert-error.hide
+        button.close(ms-click="close_alert")
+        | {{error_tips}}
+      div.control-group
+        label.control-label(ms-text="lang.label_ip")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input#add_ip.m-wrap.tooltips(type="text",name="ip",ms-duplex="ip",data-trigger="hover",ms-data-original-title="lang.tips_ip",data-placement="top")
+            
+      div.control-group
+        label.control-label(ms-text="lang.mode")
+        div.controls
+          div.input-icon.left
+            i.icon-screen-desktop
+          select#addmachine.proselection(ms-each-e="options",name="machinetype")
+            option(ms-value="e.value",ms-text="e.key")
+            
+      div.control-group(style="display:none")
+        label.control-label(ms-text="lang.label_size")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="size",ms-duplex="size",disabled)
+            
+      div.control-group(style="display:none")
+        label.control-label(ms-text="lang.label_version")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="version",ms-duplex="version",disabled)
+            
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

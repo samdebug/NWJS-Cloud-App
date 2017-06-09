@@ -1,0 +1,35 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.title")
+  div.modal-body
+    form.eth-bonding.form-horizontal(action="javascripts:;")
+      div.row-fluid
+        div.control-group
+          label.control-label(ms-text="lang.ip")
+          div.controls
+            div.input-icon.left
+              i.icon-code
+              input.m-wrap(name="ip",type="text",data-trigger="hover",ms-duplex="ip")
+        div.control-group
+          label.control-label(ms-text="lang.netmask")
+          div.controls
+            div.input-icon.left
+              i.icon-info
+              input.m-wrap(name="netmask",type="text",data-trigger="hover",ms-duplex="netmask")
+        div.control-group
+          label.control-label(ms-text="lang.mode")
+          div.controls
+            div.input-icon.left
+              i.icon-cogs
+            select#eth-bonding.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options")
+              option(ms-value="e.value",ms-text="e.key")
+            div.clearfix
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

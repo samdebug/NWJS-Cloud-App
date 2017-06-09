@@ -1,0 +1,14 @@
+doctype html
+table.table.table-condensed.table-hover
+  thead
+    tr
+      th #
+      th(ms-text="lang.th_location")
+      th(ms-text="lang.th_health")
+      th(ms-text="lang.th_role")
+  tbody
+    tr(ms-repeat-e="disks")
+      td(ms-text="$index")
+      td {{e.location}}
+      td(ms-html="fattr_health(e.health)")
+      td(ms-html="fattr_role(e.role)")

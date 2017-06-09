@@ -1,0 +1,51 @@
+doctype html
+div.container-fluid
+  h3.page-title(ms-html="lang.title")
+  div.row-fluid
+    div.span12
+      div.portlet.box.blue
+        div.portlet-title
+          div.caption
+            i.icon-bar-chart
+            | {{lang.tabletitle}}
+          div.actions
+            a.btn.btn-default.btn-sm(href="javascript:;",ms-click="search")
+              i.icon-plus
+              | {{lang.add_btn}}
+            | &nbsp;
+            a.btn.btn-default.btn-sm(href="javascript:;",ms-click="test",ms-visible="false")
+              i.icon-trash
+              | {{lang.delete_btn}}              
+        div.portlet-body
+          table.table.table-striped
+            tbody
+              tr(ms-repeat-col="devices")
+                td(style="border-top: 0;")
+                  div.responsive.span3(data-tablet="span4",data-desktop="span4",ms-repeat-device="col")
+                    div.dashboard-stat.blue(ms-if="device.health == true",style="border-radius: 2px !important;cursor:pointer;background:#3598dc;")
+                      div.visual(ms-click="detail(device)",ms-title="lang.tips_detail",data-placement="bottom",style="margin-left: -35px;")
+                        i.icon-desktop(style="opacity: 0.1;font-size: 110px;")
+                      div.details(ms-click="detail(device)",ms-title="lang.tips_detail",data-placement="bottom",style="padding-top: 16px;")
+                        div.number_small(ms-text="device.name")
+                      a.more(href="javascript:;",ms-click="unmonitor(device)",style="background:rgb(78, 154, 219);border-radius: 2px !important")
+                        | {{lang.remove}}
+                        i.m-icon-swapright.m-icon-white
+                 
+                    div.dashboard-stat.red(ms-if="device.health == false",style="background:#e35b5a;border-radius: 2px !important;")
+                      div.visual(ms-click="detail(device)",ms-title="lang.tips_detail",data-placement="bottom",style="margin-left: -35px;")
+                        i.icon-desktop(style="opacity: 0.1;font-size: 110px;")
+                      div.details(ms-click="detail(device)",ms-title="lang.tips_detail",data-placement="bottom",style="padding-top: 16px;")
+                        div.number_small(ms-text="device.name")
+                      a.more(href="javascript:;",ms-click="unmonitor(device)",style="background:#e04a49;border-radius: 2px !important")
+                        | {{lang.remove}}
+                        i.m-icon-swapright.m-icon-white
+                        
+                    div.dashboard-stat.yellow(ms-if="device.health == 'degraded'",style="background:#F1C40F;border-radius: 2px !important;")
+                      div.visual(ms-click="detail(device)",ms-title="lang.tips_detail",data-placement="bottom",style="margin-left: -35px;")
+                        i.icon-desktop(style="opacity: 0.1;font-size: 110px;")
+                      div.details(ms-click="detail(device)",ms-title="lang.tips_detail",data-placement="bottom",style="padding-top: 16px;")
+                        div.number_small(ms-text="device.name")
+                      a.more(href="javascript:;",ms-click="unmonitor(device)",style="background:rgba(241, 196, 15, 0.73);border-radius: 2px !important")
+                        | {{lang.remove}}
+                        i.m-icon-swapright.m-icon-white                        
+                  | &nbsp;                  

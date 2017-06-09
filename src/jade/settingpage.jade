@@ -1,0 +1,156 @@
+doctype html
+div.container-fluid
+  h3.page-title(ms-text="lang.title")
+  div.row-fluid
+    div.row-fluid
+      div.span12
+        div.portlet.box.light-grey
+          div.portlet-title
+            div.caption
+              i.icon-signal
+              | {{lang.title_iface_config}}
+            div.actions
+              a.btn.green(href="javascript:;",ms-click="eth_bonding",ms-visible="able_bonding")
+                i.icon-level-up
+                | {{lang.btn_eth_bonding}}
+              a.btn.red(href="javascript:;",ms-click="eth_bonding_cancel",ms-visible="!able_bonding")
+                i.icon-level-down
+                | {{lang.btn_eth_bonding_cancel}}
+          div.portlet-body
+            form#network-table(action="javascript:;")
+              table.table.table-striped
+                thead
+                  tr
+                    th(ms-text="lang.th_iface")
+                    th(ms-text="lang.th_ipaddr")
+                    th(ms-text="lang.th_netmask")
+                    th(ms-text="lang.th_edit")
+                tbody
+                  tr(ms-repeat-e="ifaces")
+                    td(ms-text="e.iface")
+                    td(ms-if="!e.edit",ms-text="e.ipaddr")
+                    td(ms-if="e.edit")
+                      div.control-group
+                        div.controls
+                          div
+                            input.m-wrap.small(type="text",name="ipaddr",ms-duplex="e.ipaddr")
+                    td(ms-if="!e.edit",ms-text="e.netmask")
+                    td(ms-if="e.edit")
+                      div.control-group
+                        div.controls
+                          div
+                            input.m-wrap.small(type="text",name="netmask",ms-duplex="e.netmask")
+                    td(ms-if="!e.edit")
+                      a.btn.mini.yellow(href="javascript:;",ms-click="edit_iface(e)")
+                        i.icon-pencil
+                        | {{lang.btn_iface_edit}}
+                    td(ms-if="e.edit")
+                      a.btn.mini(ms-click="cancel_edit_iface(e)")
+                        i.icon-undo
+                        | {{lang.btn_iface_cancel}}
+                        | &nbsp;
+                      a.btn.mini.green(ms-click="submit_iface(e)")
+                        i.icon-ok
+                        | {{lang.btn_iface_confirm}}
+
+    hr(ms-visible="server_switch")
+    div.row-fluid(ms-visible="server_switch")
+      div.span6
+        h4(ms-text="lang.title_service_config")
+        form.server.form-vertical(action="javascripts:;")
+
+          div.control-group
+            div.controls
+              div.input-icon.left
+                i.icon-gear
+                input.m-wrap.placeholder-no-fix(type="text",name="serverid",ms-attr-placeholder="lang.title_service_id",ms-duplex="serverid")
+
+          div.control-group
+            div.controls
+              select#server_select.chosen(name="server_select",tabindex="-1",ms-each-e="server_options",style="width:247px;")
+                option(ms-value="e.value",ms-text="e.msg")
+              div.clearfix
+          div.control-group
+            div.controls
+              div.input-icon.left
+                i.icon-gear
+                input.m-wrap.placeholder-no-fix(type="text",name="local_serverip",ms-attr-placeholder="lang.title_service_local_ip",ms-duplex="local_serverip")
+          div.control-group
+            div.controls
+              div.input-icon.left
+                i.icon-gear
+                input.m-wrap.placeholder-no-fix(type="text",name="local_serverport",ms-attr-placeholder="lang.title_service_port",ms-duplex="local_serverport")
+
+          div.portlet-body(style="display:block;",ms-visible="select_ct")
+            table.table.table-striped 
+              tbody   
+                tr
+                  div.control-group.quickmode          
+                  label.control-label(ms-text="lang.select_store_path")
+                tr
+                  div.control-group
+                    div.controls
+                      div.input-icon.left
+                        i.icon-gear
+                        input.m-wrap.placeholder-no-fix(type="text",name="directory",placeholder="/nvr/d1;/nvr/d2",ms-duplex="directory",readonly,disabled)
+
+      div.span4
+        div.portlet.paddingless
+          div.portlet-body(style="display:block;")
+            h4(ms-text="lang.title_service_central_config")
+            form#server-table(action="javascripts:;")
+              div.control-group
+                div.controls
+                  div.input-icon.left
+                    i.icon-gear
+                    input.m-wrap.placeholder-no-fix(type="text",name="cmssverip",ms-attr-placeholder="lang.title_service_central_ip",ms-duplex="cmssverip")
+              div.control-group
+                div.controls
+                  div.input-icon.left
+                    i.icon-gear
+                    input.m-wrap.placeholder-no-fix(type="text",name="cmssverport",ms-attr-placeholder="lang.title_service_port",ms-duplex="cmssverport")
+          button.btn.green.submit(type="button",ms-click="znv_server")
+            i.icon-ok.m-icon-white
+            | {{lang.btn_config_gateway}}
+
+    hr
+    div.row-fluid
+      div.span12
+        h4(ms-text="lang.title_gateway_config")
+        form.gateway.form-vertical(action="javascripts:;")
+          div.control-group
+            div.controls
+              div.input-icon.left
+                i.icon-gear
+                input.m-wrap.placeholder-no-fix(type="text",name="gateway",ms-attr-placeholder="lang.label_gateway",ms-duplex="gateway")
+          button.btn.green.submit(type="button",ms-click="submit_gateway")
+            i.icon-ok.m-icon-white
+            | {{lang.btn_config_gateway}}
+    hr
+    div.row-fluid
+      div.span12
+        h4(ms-text="lang.title_useradmin")
+        form.passwd.form-vertical(action="javascripts:;")
+          div.control-group
+            div.controls
+              div.input-icon.left
+                i.icon-user
+                input.m-wrap.placeholder-no-fix(type="text",placeholder="admin",name="username",readonly,disabled)
+          div.control-group
+            div.controls
+              div.input-icon.left
+                i.icon-lock
+                input.m-wrap.placeholder-no-fix.tooltips(type="password",ms-attr-placeholder="lang.label_oldpasswd",name="old_passwd",data-placement="right",ms-title="lang.tooltips_new_passwd",ms-duplex="old_passwd",ms-keypress="keypress_passwd")
+          div.control-group
+            div.controls
+              div.input-icon.left
+                i.icon-lock
+                input.m-wrap.placeholder-no-fix.tooltips(type="password",ms-attr-placeholder="lang.label_newpasswd",name="new_passwd",data-trigger="hover",data-placement="right",ms-title="lang.tooltips_new_passwd",ms-duplex="new_passwd",ms-keypress="keypress_passwd")
+          div.control-group
+            div.controls
+              div.input-icon.left
+                i.icon-lock
+                input.m-wrap.placeholder-no-fix.tooltips(type="password",ms-attr-placeholder="lang.label_newpasswd_confirm",name="confirm_passwd",data-placement="right",ms-title="lang.tooltips_new_passwd",ms-duplex="confirm_passwd",ms-keypress="keypress_passwd")
+          button.btn.green(type="button",ms-click="submit_passwd")
+            i.icon-ok.m-icon-white
+            | {{lang.btn_changepasswd}}

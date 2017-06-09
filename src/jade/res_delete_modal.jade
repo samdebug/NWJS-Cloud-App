@@ -1,0 +1,22 @@
+doctype html
+div.modal-header
+  button.close(type="button",data-dismiss="modal")
+  h3(ms-text="lang.title")
+div.modal-body
+  div.portlet-body.form
+    div.alert.alert-block.alert-error.fade.in
+      h4.alert-heading(ms-text="lang.heading")
+      p(ms-text="lang.alert")
+    form.form-horizontal(action="javascript:;")
+      div.control-group
+        label.control-label(ms-text="lang.label_res")
+        div.controls
+          select.chosen(multiple="multiple",tabindex="-1",ms-each-e="res")
+            option(ms-text="e.name",ms-value="e.name",selected)
+div.modal-footer
+  button.btn(type="button",data-dismiss="modal")
+    i.icon-undo
+    | {{lang.btn_cancel}}
+  button.btn.green(type="button",ms-click="submit")
+    i.icon-ok
+    | {{lang.btn_confirm}}

@@ -1,0 +1,41 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.title")
+  div.modal-body
+    form.initr.form-horizontal(action="javascript:;")
+      div.row-fluid
+        div.control-group(ms-visible="!show_iscsi")
+          label.control-label(ms-text="lang.wwpn")
+          div.controls
+            div.input-icon.left
+              i.icon-sitemap
+              input.m-wrap.tooltips(name="wwpn",type="text",data-trigger="hover",ms-data-original-title="lang.tooltips_initr",ms-duplex="initr_wwpn")
+
+
+        div.control-group(ms-visible="show_iscsi")
+          label.control-label(ms-text="lang.wwn")
+          div.controls
+            div.input-icon.left
+              i.icon-sitemap
+              input.m-wrap.tooltips(name="wwn",type="text",data-trigger="hover",ms-data-original-title="lang.tooltips_initr",ms-duplex="initr_wwn")
+        
+        
+        div.control-group(ms-visible="show_iscsi")
+          label.control-label(ms-text="lang.portals")
+          div#portals.controls(ms-each-e="portals")
+            div(ms-if="e.ipaddr!==''")
+              label.checkbox(style="margin-right: 5px !important;margin-top: 5px;float:left;")
+                div.checker
+                  span(ms-class="checked: e.checked")
+                    input(name="eth-checkbox",type="checkbox",style="opacity: 0;",ms-duplex-radio="e.checked")
+              label(style="margin-top: 5px;float:left;",ms-text="e.ipaddr")
+              div.clearfix(style="margin-top:5px;")
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

@@ -1,0 +1,66 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h4(ms-text="'扩容'")
+  div.modal-body
+    form.raid.form-horizontal(action="javascript:;")
+      div.row-fluid
+        div.alert.alert-error.hide
+          button.close(ms-click="close_alert")
+          | 磁盘选择错误
+        
+        div(style="text-align:center;padding-top:140px",ms-visible="show_loading === true")
+          div.loader.loader-5
+        //div(class="loader1",ms-visible="show_loading === true",style="margin-top: 100px;margin-bottom: 100px;")
+          i
+          i
+                  
+        div.control-group(style="display:none")
+          label.control-label(ms-text="lang.label_name")
+          div.controls
+            div.input-icon.left
+              i.icon-tasks
+              input.m-wrap.tooltips(name="name",type="text",data-trigger="hover",ms-data-original-title="lang.tooltips_name",data-placement="right",ms-duplex="name")
+        
+        div.control-group(ms-visible="show_loading === false")
+          label.control-label(ms-text="lang.label_level")
+          div.controls
+            label.radio
+              input(type="radio",name="level",value="0",ms-duplex-text="level")
+              | 0
+            label.radio
+              input(type="radio",name="level",value="1",ms-duplex-text="level")
+              | 1
+            label.radio
+              input(type="radio",name="level",value="5",ms-duplex-text="level")
+              | 5
+           
+        div#dsuui(ms-visible="show_loading === false")
+        
+        div.control-group(style="display:none")
+          label.control-label(ms-text="lang.label_rebuild_priority")
+          div.controls
+            label.radio
+              input(type="radio",name="rebuild_priority",value="low",ms-duplex-text="rebuild_priority")
+              | {{lang.label_rebuild_priority_low}}
+            label.radio
+              input(type="radio",name="rebuild_priority",value="middle",ms-duplex-text="rebuild_priority")
+              | {{lang.label_rebuild_priority_middle}}
+            label.radio
+              input(type="radio",name="rebuild_priority",value="high",ms-duplex-text="rebuild_priority")
+              | {{lang.label_rebuild_priority_high}}
+              
+        div.control-group(style="display:none")
+          label.control-label(ms-text="lang.label_sync")
+          div.controls
+            div.basic-toggle-button.toggle-button
+              input#sync(type="checkbox")
+              
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

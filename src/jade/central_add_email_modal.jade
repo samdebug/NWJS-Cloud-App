@@ -1,0 +1,40 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h4(ms-text="lang.title_add")
+  div.modal-body
+    form.add_email.form-horizontal(action="javascripts:;")
+      div.alert.alert-error.hide
+        button.close(ms-click="close_alert")
+        | 请填写完整
+      div.control-group
+        label.control-label(ms-text="lang.label_address")
+        div.controls
+          div.input-icon.left
+            i.icon-directions
+            input.m-wrap(type="text",name="email",ms-duplex="email")
+      
+      div.control-group
+        label.control-label(ms-text="lang.label_level")
+        div.controls
+          div.input-icon.left
+            i.icon-trophy
+          //select#addemail.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options")
+          select#addemail.proselection(ms-each-e="options",name="level")
+            option(ms-value="e.value",ms-text="e.key")
+      
+      div.control-group(style="display:none")
+        label.control-label(ms-text="lang.label_ttl")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input.m-wrap(type="text",name="ttl",ms-duplex="ttl")
+            
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

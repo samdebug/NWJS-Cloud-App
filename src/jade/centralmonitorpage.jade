@@ -1,0 +1,115 @@
+doctype html
+div.container-fluid
+  ul.breadcrumb
+    li
+      a(href="#",ms-text="'主页'",ms-click="switch_to_page('overview')")
+      i.icon-circle
+    li
+      a(ms-text="'系统详情'")
+  h3.page-title(ms-html="lang.title")
+  div.row-fluid.ui-sortable#sortable_portlets
+    div.span12.column.sortable
+      div.portlet.box.blue
+        div.portlet-title
+          div.caption
+            i.icon-bar-chart
+            | {{lang.tabletitle}}
+          div.actions
+            div.btn-group
+              a.btn.btn-default.btn-sm(href="#",data-toggle="dropdown")
+                i.icon-wrench
+                | 操作
+                i.icon-angle-down(style="padding-left: 10px;")
+              ul.dropdown-menu.pull-right
+                li(ms-click="manual")
+                  a(href="#")
+                    i.icon-plus(style="padding-right: 5px;")
+                    | 添加
+                    
+                li(ms-click="delete_record")
+                  a(href="#")
+                    i.icon-trash(style="padding-right: 5px;")
+                    | 解除
+                    
+                //li(ms-click="unmonitor")
+                  a(href="#")
+                    i.icon-trash(style="padding-right: 5px;")
+                    | 解除
+
+                //li(ms-click="search")
+                  //a(href="#")
+                    //i.icon-spinner(style="padding-right: 5px;")
+                    //| 自动 
+                    
+        div.portlet-body(style="min-height:300px")
+          div.tabbable.tabbable-custom
+            ul.nav.nav-tabs
+              li.active(ms-click="tab_listener('list')")
+                a(class="special",href="#page_1",data-toggle="tab")
+                  i.icon-list
+                  | 列表
+              li(ms-click="tab_listener('graph')")
+                a(class="special",href="#page_2",data-toggle="tab")
+                  i.icon-share
+                  | 拓扑图
+                  
+            div.tab-content
+              div#page_1.tab-pane.active
+                table#monitors.table.table-striped.table-hover
+                  thead
+                    tr
+                      th(style="width:20px")
+                        input(type="checkbox",ms-duplex-radio="all_checked")
+                      th(ms-text="'地址'",style="")
+                      th(ms-text="'类型'",style="")
+                      th(ms-text="'状态'",style="")
+                      th(ms-text="'操作'",style="")
+                  tbody
+                    tr(ms-repeat-e="total_machine")
+                      td
+                        input(type="checkbox",ms-duplex-radio="e.checked")
+                      td(ms-text="e.name")
+                      td(ms-text="e.chinese_type")
+                      td(ms-html="fattr_monitor_status(e.health)")
+                      td
+                        a(href="javascript:;",class="hastip",ms-click="detail(e)",title="详情")
+                          i.icon-search
+                            
+              div#page_2.tab-pane
+                //div.spinner.spinner-1(ms-visible="show_loading === true",style="margin-top: 100px;")
+                //div(class="loader1",ms-visible="show_loading === true",style="margin-top: 100px;")
+                  i
+                  i
+                div(style="text-align:center;padding-top:130px",ms-visible="show_loading === true")
+                  div.loader.loader-5
+                span(style="float:right;padding-right: 23px;",ms-visible="show_loading === false")   存储
+                  img(class="img-circle",src="images/d3/networking.png",style="width: 20px;height: 20px;float: left;")
+                //span(style="float:right;padding-right: 23px;",ms-visible="show_loading === false")   备服务器
+                  //img(class="img-circle",src="images/d3/computer-backup.png",style="width: 20px;height: 20px;float: left;")
+                span(style="float:right;padding-right: 23px;",ms-visible="show_loading === false")   服务器
+                  img(class="img-circle",src="images/d3/computer-master.png",style="width: 20px;height: 20px;float: left;")
+                
+                //span(style="float:right;border:2px; background:#45d1e3; float:left; width:20px; height:20px")    ：在线
+                //span(style="float:right;padding-right: 23px;border:2px; background:#45d1e3; float:left; width:20px; height:20px")    ：掉线
+                    
+                div#body(class="body",ms-visible="show_loading === false")
+                div#canvas(ms-if="show_tree_1==true")
+                div.tree(ms-if="show_tree_1==true")
+                  ul
+                    li(ms-each-t="devices_server")
+                      span
+                        a(href='javascript: void(0);',data-toggle="branch",ms-click="tab_click_server",ms-data-idx="$index")
+                          span.remove
+                            i.icon-close
+                          i.icon-desktop
+                          | {{t.name}}
+                        div(ms-html="fattr_machine_status(t.health)",style="padding-left: 5px;display:inline")
+                        ul(class="branch",ms-each-e="devices_store")
+                          li
+                            span
+                              a(href='javascript: void(0);',ms-click="tab_click_store",ms-data-idx="$index")
+                                span.remove
+                                  i.icon-close
+                                i.icon-screen-desktop
+                                | {{e.name}}
+                              div(ms-html="fattr_machine_status(e.health)",style="padding-left: 5px;display:inline")

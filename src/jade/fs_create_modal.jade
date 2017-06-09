@@ -1,0 +1,21 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.title")
+  div.modal-body
+    form.fs.form-horizontal(action="javascript:;")
+      div.row-fluid
+        div.control-group
+          div#dirs.controls(ms-each-e="mount_dirs")
+            div
+              label.checkbox(ms-class="disk_offline:e.used")
+                input(type="checkbox",name="dir-checkbox",ms-disabled="e.used",ms-duplex-radio="e.checked")
+                | {{e.path}}
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

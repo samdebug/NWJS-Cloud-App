@@ -1,0 +1,108 @@
+doctype html
+div.container-fluid
+  h3.page-title(ms-html="lang.title")
+  div.row-fluid
+    div.responsive.span3(data-tablet="span6",data-desktop="span3")
+      div.dashboard-stat.purple
+        div.visual
+          i.icon-hdd
+        div.details
+          div.number(ms-text="disk_num")
+          div.desc(ms-text="lang.disk_num")
+        a.more(href="javascript:;",ms-click="switch_to_page('disk')")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+    div.responsive.span3(data-tablet="span6",data-desktop="span3")
+      div.dashboard-stat.yellow
+        div.visual
+          i.icon-tasks
+        div.details
+          div.number(ms-text="raid_num")
+          div.desc(ms-text="lang.raid_num")
+        a.more(href="javascript:;",ms-click="switch_to_page('raid')")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+    div.responsive.span3(data-tablet="span6 fix-offset",data-desktop="span3")
+      div.dashboard-stat.green
+        div.visual
+          i.icon-list-alt
+        div.details
+          div.number(ms-text="volume_num")
+          div.desc(ms-text="lang.volume_num")
+        a.more(href="javascript:;",ms-click="switch_to_page('volume')")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+    div.responsive.span3(data-tablet="span6",data-desktop="span3")
+      div.dashboard-stat.blue
+        div.visual
+          i.icon-sitemap
+        div.details
+          div.number(ms-text="initr_num")
+          div.desc(ms-text="lang.initr_num")
+        a.more(href="javascript:;",ms-click="switch_to_page('initr')")
+          | {{lang.more}}
+          i.m-icon-swapright.m-icon-white
+  div.clearfix
+  div.row-fluid
+    div.span6
+      div.portlet.paddingless
+        div.portlet-title
+          div.caption
+            i.icon-bar-chart
+            | {{lang.title_load}}
+          div.tools
+            a.collapse(href="javascript:;")
+        div.portlet-body
+          div.row-fluid
+            div.span4
+              div.easy-pie-chart
+                div#cpu-load.number.easyPieChart(data-percent="0")
+                  span +{{cpu_load}}%
+                a.title(href="javascript:;",ms-text="lang.title_cpu_load")
+            div.span4
+              div.easy-pie-chart
+                div#mem-load.number.easyPieChart(data-percent="0")
+                  span +{{mem_load}}%
+                a.title(href="javascript:;",ms-text="lang.title_mem_load")
+            div.span4
+              div.easy-pie-chart
+                div#temp-load.number.easyPieChart(data-percent="0")
+                  span {{temp_load}}℃
+                a.title(href="javascript:;",ms-text="lang.title_temp_load")
+      div.portlet.solid.bordered.light-grey
+        div.portlet-title
+          div.caption
+            i.icon-signal
+            | {{lang.title_flow}}
+          div.tools
+            div.btn-group.pull-right(data-toggle="buttons-radio",ms-click="switch_flow_type")
+              a.btn.red.mini(href="javascript:;",ms-text="lang.btn_write_flow",ms-class="active:flow_type=='fwrite_mb'",data-flow-type="fwrite_mb")
+              a.btn.red.mini(href="javascript:;",ms-text="lang.btn_read_flow",ms-class="active:flow_type=='fread_mb'",data-flow-type="fread_mb")
+        div.portlet-body
+          div#load_stats_content(style="display: block;")
+            div#flow_stats(style="height: 160px;")
+    div.span6
+      div.portlet.paddingless
+        div.portlet-title.line
+          div.caption
+            i.icon-bell
+            | {{lang.title_notice}}
+          div.tools
+            a.collapse(href="javascript:;")
+        div.portlet-body
+          div.tabbable.tabbable-custom
+            ul.nav.nav-tabs
+              li.active
+                a(href="#tab_1_1",data-toggle="tab",ms-text="lang.tab_log")
+            div.tab-content
+              div#tab_1_1.tab-pane.active
+                div#journals-scroller.scroller(data-height="358px")
+                  ul.feeds(ms-each-e="journals")
+                    li
+                      div.col1
+                        div.cont
+                          div.cont-col1
+                            div.label.label-success
+                              i.icon-bell
+                          div.cont-col2
+                            div.desc(ms-text="e.message")

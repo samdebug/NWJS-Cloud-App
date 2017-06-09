@@ -1,0 +1,62 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.title")
+  div.modal-body
+    form.volume.form-horizontal(action="javascript:;")
+      div.row-fluid
+        div.control-group
+          label.control-label(ms-text="lang.name")
+          div.controls
+            div.input-icon.left
+              i.icon-list-alt
+              input.m-wrap.tooltips(name="name",type="text",data-trigger="hover",ms-data-original-title="lang.tooltips_name",ms-duplex="volume_name")
+        div.control-group
+          label.control-label(ms-text="lang.raid")
+          div.controls
+            div.input-icon.left
+              i.icon-tasks
+            select#raid-select.chosen(name="raid-select",tabindex="-1",style="width:247px;",ms-each-e="raid_options")
+              option(ms-value="e.id",ms-text="e.name")
+            div.clearfix
+        div.control-group(style="width:426px;margin-bottom:0px;",ms-visible="raid")
+          label.control-label
+          div.controls
+            div.progress(ms-html="fattr_cap_usage(raid.cap_sector,raid.used_cap_sector,unit)")
+        div.control-group
+          label.control-label(ms-text="lang.capacity")
+          div.controls
+            div.input-icon.left
+              i.icon-beaker
+              input#cap.m-wrap(name="capacity",type="text",ms-duplex="cap")
+        div.control-group
+          label.control-label
+          div.controls
+            label.radio
+              input(type="radio",name="unit",value="TB",ms-duplex-text="unit")
+              | TB
+            label.radio
+              input(type="radio",name="unit",value="GB",ms-duplex-text="unit")
+              | GB
+            label.radio
+              input(type="radio",name="unit",value="MB",ms-duplex-text="unit")
+              | MB
+        div.control-group
+          label.control-label(ms-text="lang.automap")
+          div.controls
+            div.basic-toggle-button.toggle-button
+              input#automap(type="checkbox")
+        div.control-group(ms-visible="automap")
+          label.control-label(ms-text="lang.initr")
+          div.controls
+            div.input-icon.left
+              i.icon-sitemap
+              input.m-wrap.tooltips(name="wwn",type="text",data-trigger="hover",ms-data-original-title="lang.tooltips_initr",style="width:300px",ms-duplex="initr_wwn")
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

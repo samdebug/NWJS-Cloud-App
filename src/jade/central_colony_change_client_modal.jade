@@ -1,0 +1,50 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h4(ms-text="'启动'")
+  div.modal-body
+    form.create.form-horizontal(action="javascripts:;")
+      div.control-group
+        label.control-label(ms-text="'集群名称'")
+        div.controls
+          div.input-icon.left
+            i.icon-pencil
+            input#name.m-wrap.tooltips(type="text",name="name",ms-duplex="name",disabled)
+      
+      div.control-group
+        label.control-label(ms-text="'访问权限'")
+        div.controls.tooltips(style="color: rgb(85, 85, 85);display: table-caption;margin-left: 20px;border: 1px solid rgb(194, 202, 216);padding: 11px 161px 10px 12px;",data-trigger="hover",ms-data-original-title="lang.tips_client",data-placement="top")
+          div.disk-checkbox-col
+            label.checkbox.tooltips(style="width:200px")
+              input(type="checkbox",name="selector",ms-duplex-radio="all_checked",ms-text="'请选择'",id="all_checked")
+              | 全选
+                            
+          div.disk-checkbox-col(ms-repeat-e="storages")
+            label.checkbox.tooltips(style="width:200px")
+              input(type="checkbox",name="selector",ms-duplex-radio="e.checked")
+              | {{e.ip}}
+              
+      div.control-group(style="display:none")
+        label.control-label(ms-text="'访问地址'")
+        div.controls
+          div.input-icon.left
+            i.icon-note
+          //select#client_option.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options_client")
+          select#client_option.proselection(ms-each-e="options_client",name="client")
+            option(ms-value="e.value",ms-text="e.key")
+            
+      div.control-group(style="display:none")
+        label.control-label(ms-text="'客户端地址'")
+        div.controls
+          div.input-icon.left
+            i.icon-directions
+            input#add_ip.m-wrap.tooltips(type="text",name="ip",ms-duplex="ip",data-trigger="hover",ms-data-original-title="lang.tips_client",data-placement="top")
+            
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

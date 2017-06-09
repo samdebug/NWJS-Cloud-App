@@ -1,0 +1,51 @@
+doctype html
+div.container-fluid
+  h3.page-title(ms-html="lang.title")
+  div.row-fluid
+    div.span12
+      div.portlet.box.green
+        div.portlet-title
+          div.caption
+            i.icon-layers
+            | {{lang.tabletitle}}
+          div.actions
+            a.btn.btn-default.btn-sm(href="javascript:;",ms-click="create_mysql")
+              i.icon-plus
+              | {{lang.add_btn}}
+            | &nbsp;
+            a.btn.btn-default.btn-sm(href="javascript:;",ms-click="delete_record")
+              i.icon-close
+              | {{lang.remove_btn}}
+            | &nbsp;
+            
+        div.portlet-body
+          table#server-table.table.table-striped.table-hover
+            thead
+              tr
+                th(style="width:20px")
+                  input(type="checkbox",ms-duplex-radio="all_checked")
+                th(ms-text="lang.th_detail",style="width:40px;")
+                th(ms-text="lang.th_name",style="width:200px;")
+                th(ms-text="lang.th_ip",style="width:200px;")
+                th(ms-text="lang.th_session",style="width:200px;")
+                th(ms-text="lang.th_role",style="width:200px;")
+                //th(ms-text="lang.th_edit",style="width:200px;text-align:center;")
+            tbody
+              tr(ms-repeat-e="devices")
+                td
+                  input(type="checkbox",ms-duplex-radio="e.checked")
+                td
+                  span.row-details(ms-click="detail",ms-class="row-details-close:e.detail_closed",ms-class-1="row-details-open:!e.detail_closed")
+                td(ms-text="e.name")
+                td(ms-text="e.ip")
+                td(ms-html="fattr_server_health(e.status)")
+                td(ms-text="e.Role")
+                //td(style="width:100px;text-align:center")
+                  //a.btn.yellow.mini.tooltips(href="javascript:;",ms-click="combine(e.ip);",ms-if="e.show_combine==true")
+                    //| {{lang.func_combine}}
+                  //a.btn.green.mini.tooltips(href="javascript:;",ms-click="expand(e.ip);")
+                    //| {{lang.func_pre}}
+                  //a.btn.blue.mini.tooltips(href="javascript:;",ms-click="start(e.ip);")
+                    //| {{lang.func_node}}
+               
+                

@@ -1,0 +1,32 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="lang.title")
+  div.modal-body
+    form.raid.form-horizontal(action="javascript:;")
+      div.row-fluid
+        div#dsuui
+        div.control-group
+          label.control-label(ms-text="lang.label_role")
+          div.controls
+            label.radio
+              input(type="radio",name="role",value="global_spare",ms-duplex-text="role")
+              | {{ lang.role_global_spare }}
+            label.radio
+              input(type="radio",name="role",value="spare",ms-duplex-text="role")
+              | {{ lang.role_spare }}
+        div.control-group(ms-visible="select_visible")
+          label.control-label(ms-text="lang.label_raid")
+          div.controls
+            div.input-icon.left
+              i.icon-tasks
+            select#raid-select.chosen(name="raid-select",tabindex="-1",style="width:247px;",ms-each-e="raid_options")
+              option(ms-value="e.name",ms-text="e.name")
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

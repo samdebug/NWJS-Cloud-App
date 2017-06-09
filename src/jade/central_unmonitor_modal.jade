@@ -1,0 +1,41 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h4(ms-text="lang.title")
+  div.modal-body
+    div.row-fluid
+      div.alert.alert-error.hide
+        button.close(ms-click="close_alert")
+        | 请选择
+      div.portlet.box.blue
+        div.portlet-title
+          div.caption
+            | 监控列表
+          div.actions
+        div.portlet-body
+          table#unmonitor-table.table.table-striped.table-hover
+            thead
+              tr
+                th(style="width:20px")
+                  input(type="checkbox",ms-duplex-radio="all_checked")
+                th(ms-text="lang.ip",style="")
+                th(ms-text="lang.type",style="")
+                //th(ms-text="'角色'",style="")
+                th(ms-text="lang.status",style="")
+            tbody
+              tr(ms-repeat-e="device")
+                 td
+                   input(type="checkbox",ms-duplex-radio="e.checked")
+                 td(ms-text="e.Ip")
+                 td(ms-text="e.Chinese_devtype")
+                 //td(ms-text="e.Chinese_role")
+                 td(ms-html="fattr_monitor_status(e.Status)")
+                          
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | {{lang.btn_cancel}}
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | {{lang.btn_confirm}}

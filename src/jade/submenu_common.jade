@@ -1,0 +1,11 @@
+doctype html
+li(ms-repeat-e="navs_overview",ms-click="switch_to_page",ms-class="active:$index===active_index",style="")
+  a.wave(href="javascript:;",ms-data-id="e.id",style="border-top: 1px solid #3d4957!important;")
+    //i(ms-class="{{e.icon}}")
+    span.title(style="")
+      | {{e.title}}
+    //span.arrow.open
+    //span.selected(ms-class="active:$index===active_index")
+    //span(class="badge",ms-text=5)
+    
+  ul.sub-menu(style="list-style: none;display:none;margin:0")  

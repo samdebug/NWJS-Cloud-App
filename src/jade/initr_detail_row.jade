@@ -1,0 +1,10 @@
+doctype html
+table.table.table-condensed.table-hover
+  thead
+    tr
+      th #
+      th(ms-text="lang.th_name")
+  tbody
+    tr(ms-repeat-e="volumes")
+      td(ms-text="$index")
+      td(ms-text="e.name")

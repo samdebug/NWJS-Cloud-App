@@ -1,0 +1,114 @@
+doctype html
+div.container-fluid
+  h3.page-title 系统配置
+  div.row-fluid.ui-sortable#sortable_portlets
+    div.span12.column.sortable
+      div.portlet.box.yellow(id="form_wizard_1")
+        div.portlet-title
+          div.caption
+            i.icon-layers
+            | 服务启动
+        div.portlet-body.form
+          form(action="#",class="form-horizontal",id="submit_form",novalidate="novalidate")
+            div.form-wizard
+              div.navbar.steps
+                div.navbar-inner
+                  ul.row-fluid.nav.nav-pills(id="myTab")
+                    li.span4.active
+                      a(href="#tab1",data-toggle="tab",class="step active")
+                        span.number(ms-text="'1'")
+                        span.desc
+                          i.icon-ok 
+                          | 扩容
+                          
+                    li.span4
+                      a(href="#tab2",data-toggle="tab",class="step")
+                        span.number 2
+                        span.desc
+                          i.icon-ok 
+                          | 聚合
+
+                    li.span4
+                      a(href="#tab3",data-toggle="tab",class="step")
+                        span.number 3
+                        span.desc
+                          i.icon-ok 
+                          | 启动
+                             
+              div(id="bar",class="progress progress-success progress-striped")
+                div(class="bar")
+              div.tab-content
+                div.alert.alert-error.hide
+                  button(class="close",data-dismiss="alert")
+                  | {{action_tips}}
+                  
+                div(class="tab-pane active",id="tab1")
+                  h3(class="block") 扩容即在服务器下添加存储以增加集群的容量
+                  form.setup.form-horizontal(action="javascripts:;")
+                    div.control-group
+                      label.control-label(ms-text="'服务器'")
+                      div.controls
+                        div.input-icon.left
+                          i.icon-note
+                        select#export_option.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options_export")
+                          option(ms-value="e.value",ms-text="e.key")
+                          
+                    //div.control-group
+                      //label.control-label(ms-text="'存储'")
+                      //div.controls
+                        //textarea(name="storage",ms-attr-placeholder="'请输入存储,并以逗号,隔开'",ms-duplex="storage_ip",style="min-width: 225px;min-height: 100px;max-width: 470px;font-family: Microsoft YaHei;padding: 10px;")
+                          
+                    div.control-group
+                      label.control-label(ms-text="'存储'")
+                      div.controls(style="color: rgb(85, 85, 85);display: table-caption;margin-left: 20px;border: 1px solid rgb(214, 214, 214);padding: 11px 161px 10px 12px;")
+                        div.disk-checkbox-col
+                          label.checkbox.tooltips(style="width:200px")
+                            input(type="checkbox",name="storage-checkbox-all",ms-duplex-radio="all_checked",ms-text="'请选择'",id="all_checked")
+                            | 请选择
+                            
+                        div.disk-checkbox-col(ms-repeat-e="storages")
+                          label.checkbox.tooltips(style="width:200px")
+                            input(type="checkbox",name="storage-checkbox",ms-duplex-radio="e.checked")
+                            | {{e.ip}}
+                    
+                    div.control-group
+                      label.control-label(ms-text="'客户端'")
+                      div.controls
+                        div.input-icon.left
+                          i.icon-note
+                        select#client_option.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options_client")
+                          option(ms-value="e.value",ms-text="e.key")
+
+                div(class="tab-pane",id="tab2")
+                  h3(class="block") 若使用聚合,即可进入数据保险箱模式,若不使用,则直接跳过即可
+                  form.setup.form-horizontal(action="javascripts:;")
+                    div.control-group
+                      label.control-label(ms-text="'备份服务器'")
+                      div.controls
+                        div.input-icon.left
+                          i.icon-note
+                        select#backup_option.chosen(name="mode-select",tabindex="0",style="width:247px;",ms-each-e="options_backup")
+                          option(ms-value="e.value",ms-text="e.key")
+                      div.controls
+                        a(href="javascript:;",class="btn blue",style="margin-left: 260px;",ms-click="combine")
+                          | 聚合
+                          i.m-icon-swapright.m-icon-white
+
+                div(class="tab-pane",id="tab3")
+                  h3(class="block",ms-text="'开启客户端服务即可开始使用属于你的存储空间'")
+                  div.control-group
+                    //a(href="javascript:;",class="btn blue",ms-click="expand")
+                      //| 启动
+                      //i.m-icon-swapright.m-icon-white
+                    //a.btn.red.mini(ms-click="expand",href="#",ms-text="'扩容'",style="font-size: 13px !important;height: 17px;color: rgb(216, 74, 56);background-color: rgb(255, 255, 255);margin-left: 5px !important;border-radius: 15px !important;border: 1px solid;padding-top: 8px;min-width: 25px;margin-top: -6px;")
+              
+              div.form-actions.clearfix(style="background-color: rgb(255, 255, 255);")
+                a(href="javascript:;",class="btn button-previous",style="display: none;")
+                  i.m-icon-swapleft
+                  | 上一步
+                a(href="javascript:;",class="btn blue button-next")
+                  | {{next_action}}
+                  i.m-icon-swapright.m-icon-white
+                a(href="javascript:;",class="btn green button-submit",style="display: inline-block;")
+                  | 完成
+                  i(class="m-icon-swapright m-icon-white")

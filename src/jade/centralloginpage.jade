@@ -1,0 +1,44 @@
+doctype html
+//div(id="container",class="containers")
+  //div(id="output",class="containers")
+div.container-fluid(style="position: relative;left: -9%;z-index: 1;")
+  div.logo(style="width: 120px;padding-bottom: 30px;")
+    img(src="images/logo-big.png")
+  div.content.wow.bounceInDown(style="background:#FFF")
+    form.login-form.form-vertical(action="javascript:;")
+      //div.control-group
+        //a(href="javascript:;",style="padding-left: 95px;")
+          //img(class="img-circle",src="images/bb.png",style="height: 100px;border-radius: 50% !important;")
+      h3.form-title(ms-text="lang.title",style="text-align: center;color: #32c5d2!important;")
+      div.alert.alert-error.hide
+        button.close(ms-click="close_alert")
+        span(ms-text="lang.login_error")
+      div.control-group
+        //label.control-label(ms-text="lang.label_device")
+        div.controls
+          div.input-icon.left
+            i.ti-link(style="color: rgb(130, 144, 163);padding-top: 4px;")
+            input#login-ip.m-wrap(type="text",name="device",data-provide="typeahead",ms-duplex="device",ms-keypress="keypress",placeholder="设备地址",style="background: rgb(221, 227, 236);color: rgb(130, 144, 163);border: 1px solid rgb(221, 227, 236);height: 28px;")
+      div.control-group
+        //label.control-label(ms-text="lang.label_username")
+        div.controls
+          div.input-icon.left
+            i.icon-user(style="color: rgb(130, 144, 163);padding-top: 4px;")
+            input.m-wrap(type="text",name="username",ms-duplex="username",ms-keypress="keypress",placeholder="账号",style="background: rgb(221, 227, 236);color: rgb(130, 144, 163);border: 1px solid rgb(221, 227, 236);height: 28px;")
+      div.control-group
+        //label.control-label(ms-text="lang.label_passwd")
+        div.controls
+          div.input-icon.left
+            i.icon-lock(style="color: rgb(130, 144, 163);padding-top: 4px;")
+            input.m-wrap(type="password",name="passwd",ms-duplex="passwd",ms-keypress="keypress",placeholder="密码",style="background: rgb(221, 227, 236);color: rgb(130, 144, 163);border: 1px solid rgb(221, 227, 236);height: 28px;")
+      div.form-actions
+        button#login-btn.btn.green.pull-right(type="button",ms-click="submit",style="")
+          | {{lang.btn_login}}
+          i.m-icon-swapright.m-icon-white
+          
+  div.copyright(style="color: #7a8ca5;")
+    | {{lang.copyright}}
+    
+div(id="particles-js",style="position: absolute;width: 100%;height: 116%;background-color: rgb(54, 65, 80);background-image: url('');background-repeat: no-repeat;background-size: cover;background-position: 50% 50%;position: absolute;left: 0;top: 0;")
+//script(type="text/javascript",src='js/triangle.js')
+

@@ -1,0 +1,37 @@
+doctype html
+div
+  div.modal-header
+    button.close(type="button",data-dismiss="modal",aria-hidden="true")
+    h3(ms-text="'更改'")
+  div.modal-body
+    p(ms-text="'选择需要启动的客户端地址,可多选'",style="font-weight:bold")
+    div.row-fluid
+      div.span12          
+        div.portlet.box.yellow
+          div.portlet-title
+            div.caption
+              | 集群列表
+            div.actions
+          div.portlet-body
+            form.cloud.form-horizontal(novalidate="novalidate",action="javascript:;")
+              table#colony-table.table.table-striped.table-hover
+                thead
+                  tr
+                    th(style="width: 45px;")
+                      input(type="checkbox",ms-duplex-radio="all_checked")
+                    th(ms-text="'地址'",style="")
+                    th(ms-text="'类型'",style="")
+                tbody(ms-each-e="colonys")
+                  tr
+                    td
+                      input(type="checkbox",ms-duplex-radio="e.checked")
+                    td(ms-text="e.ip")
+                    td(ms-text="e.devtype")
+  div.modal-footer
+    button.btn(type="button",data-dismiss="modal")
+      i.icon-undo
+      | 取消
+    button.btn.green(type="button",ms-click="submit")
+      i.icon-ok
+      | 确认
+       
