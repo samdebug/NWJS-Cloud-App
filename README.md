@@ -12,7 +12,7 @@ Node-Webkit 自动化打包
 2. 安装Grunt, `npm install -g grunt-cli`
 3. 拉取本Repo, `git clone `
 4. 拉取Zadmin, `git clone git@bitbucket.org:zexabox/zadmin.git src`
-5. 安装相应的包依赖, `npm install`
+5. 安装相应的包依赖, `npm install`。包括 grunt-contrib-clean,grunt-contrib-coffee,grunt-contrib-copy,grunt-contrib-jade,grunt-contrib-uglify,grunt-node-webkit-builder,grunt-scp，grunt-zip-directories。
 
 ### 构建APP
 
