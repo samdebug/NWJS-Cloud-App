@@ -9,6 +9,7 @@ lang =
         maintain: "维护中心"
         quickmode: "快速创建"
         login: "登录"
+        
     diskpage:
         title: "系统资源"
         tabletitle: "磁盘"
